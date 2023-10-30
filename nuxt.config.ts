@@ -29,6 +29,13 @@ export default defineNuxtConfig({
       include: '*',
     },
   },
+  vite:{
+    build:{
+      rollupOptions:{
+        external: ['quill']
+      }
+    }
+  },
  nitro:{
   preset: 'netlify'
  }
