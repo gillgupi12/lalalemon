@@ -1,0 +1,16 @@
+
+@layer tailwind-base, primevue, tailwind-utilities;
+
+@layer tailwind-base {
+    html,
+    body {
+      @apply font-light overscroll-none text-sm
+    }
+  @tailwind base;
+  
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
