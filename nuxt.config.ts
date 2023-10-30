@@ -32,7 +32,7 @@ export default defineNuxtConfig({
   vite:{
     build:{
       rollupOptions:{
-        external: ['quill']
+        external: ['quill', 'chart.js','chart.js/auto']
       }
     }
   },
