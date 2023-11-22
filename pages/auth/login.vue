@@ -45,8 +45,5 @@ const items = [
         </UTabs>
       </div>
     </div>
-    <div>
-      <FooterCTA />
-    </div>
   </div>
 </template>
