@@ -16,14 +16,14 @@ const toolbarItems = [
     label: "Accessories",
     path: "/accessories",
   },
-  {
-    label: "Community",
-    path: "/community",
-  },
-  {
-    label: "Find your Wellbeing",
-    path: "/wellbeing",
-  },
+  // {
+  //   label: "Community",
+  //   path: "/community",
+  // },
+  // {
+  //   label: "Find your Wellbeing",
+  //   path: "/wellbeing",
+  // },
 ];
 
 const supabase = useSupabaseClient();

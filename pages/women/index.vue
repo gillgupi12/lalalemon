@@ -1,5 +1,6 @@
 <script setup>
 import GenderSideBar from "../../components/organisms/gender/sidebar.vue";
+import GenderHeader from "../../components/organisms/gender/header.vue";
 
 const menuItems = [
   {
@@ -39,29 +40,15 @@ const menuItems = [
       <div class="p-8">
         <GenderSideBar header="lalalemon women's" :menu-items="menuItems" />
       </div>
-      <div class="flex flex-col gap-4">
-        <div class="relative">
-          <img src="/5.webp" />
-          <div class="absolute bottom-10 right-5 flex flex-col gap-2">
-            <UButton
-              color="white"
-              class="border-black text-sm border uppercase text-center font-bold py-4 px-4 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
-              size="xl"
-              label="SHOP WHAT'S NEW"
-            />
-
-            <UButton
-              color="white"
-              class="border-black text-sm border uppercase text-center font-bold py-4 px-4 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
-              size="xl"
-              label="Shop Winter White For Her"
-            />
-          </div>
-        </div>
-        <h3 class="text-3xl">
-          Blanket them in the crisp warmth of the new Winter Whites Collection.
-        </h3>
-      </div>
+      <GenderHeader
+        image-path="/5.webp"
+        image-alt-description=""
+        upper-button-label="Shop whats's new"
+        upper-button-path="women-new"
+        lower-button-label="Shop winter whites for her"
+        lower-button-path="women-new"
+        footer-description="Blanket them in the crisp warmth of the new Winter Whites Collection."
+      />
     </div>
     <div class="py-20">
       <UContainer class="flex flex-col md:grid grid-cols-2 gap-4">

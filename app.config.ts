@@ -3,6 +3,7 @@ export default defineAppConfig({
     size: '24px',
   },
   ui: {
+
     primary: 'blue',
     input: {
       rounded: '2xl'
