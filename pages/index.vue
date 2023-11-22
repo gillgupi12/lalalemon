@@ -97,21 +97,23 @@ const array = ref<any>([
 </script>
 
 <template>
-  <div>
-    <div class="flex flex-row gap-2 items-start">
-      <div class="p-8">
-        <HeroSideBar header="lalalemon" :menu-items="menuItems" />
+  <div class="container w-7xl mx-auto">
+    <div>
+      <div class="flex flex-row gap-2 items-start">
+        <div class="p-8">
+          <HeroSideBar header="lalalemon" :menu-items="menuItems" />
+        </div>
+        <HeroHeader
+          image-path="/5.webp"
+          image-alt-description=""
+          upper-button-label="Shop women whats's new"
+          upper-button-path="women-new"
+          lower-button-label="Shop men whats's new"
+          lower-button-path="men-new"
+          footer-description="Bestselling icons with a proven track record."
+        />
       </div>
-      <HeroHeader
-        image-path="/5.webp"
-        image-alt-description=""
-        upper-button-label="Shop women whats's new"
-        upper-button-path="women-new"
-        lower-button-label="Shop men whats's new"
-        lower-button-path="men-new"
-        footer-description="Bestselling icons with a proven track record."
-      />
+      <Carousel :items="array" :items-per-slide="4" />
     </div>
-    <Carousel :items="array" :items-per-slide="4" />
   </div>
 </template>

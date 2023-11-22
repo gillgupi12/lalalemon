@@ -6,7 +6,7 @@ import HeroFooter from "components/organisms/footer/index.vue";
     <OrganismsToolbar />
     <OrganismsMenubar class="z-10 sticky top-0 w-full" />
 
-    <div class="max-w-8xl container mx-auto py-0">
+    <div class="w-full mx-auto py-0">
       <slot />
     </div>
     <HeroFooter />

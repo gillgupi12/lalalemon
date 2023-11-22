@@ -35,7 +35,7 @@ const menuItems = [
 </script>
 
 <template>
-  <div>
+  <div class="container w-7xl mx-auto">
     <div class="flex flex-row gap-2 items-start">
       <div class="p-8">
         <GenderSideBar header="lalalemon men's" :menu-items="menuItems" />

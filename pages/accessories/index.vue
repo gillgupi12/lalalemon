@@ -1,7 +1,5 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-  <div>Accessories</div>
+  <div class="container w-7xl mx-auto">Accessories</div>
 </template>
