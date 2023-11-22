@@ -5,9 +5,17 @@ export default defineNuxtConfig({
       title: 'E-commerical',
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in',
+    },
+    layoutTransition: {
+      name: 'layout',
+      mode: 'out-in',
+    },
   },
   devtools: { enabled: false },
-  modules: ['@nuxtjs/supabase', '@nuxt/ui', 'nuxt-icon', '@pinia/nuxt'],
+  modules: ['@nuxtjs/supabase', '@nuxt/image', '@nuxt/ui', 'nuxt-icon', '@pinia/nuxt'],
   supabase: {
     redirectOptions: {
       login: '/auth/login',

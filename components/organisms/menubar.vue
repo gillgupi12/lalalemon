@@ -38,9 +38,9 @@ const logout = async () => {
 
 <template>
   <div
-    class="md:flex flex-row text-black py-6 w-full shadow-sm hidden bg-slate-200 dark:bg-slate-200 dark:text-black px-4"
+    class="md:flex flex-row text-black py-6 w-full shadow-sm hidden bg-white dark:bg-gray-50 dark:text-black px-4"
   >
-    <div class="flex max-w-7xl container justify-between flex-row mx-auto">
+    <div class="flex max-w-8xl container justify-between flex-row mx-auto">
       <div class="flex flex-row items-center space-x-8">
         <NuxtLink to="/">
           <Logo />

@@ -1,22 +1,10 @@
-<!-- <script setup>
-// const openSideBar = ref(false)
-// function toggleSideBar() {
-//   openSideBar.value = !openSideBar.value
-// }
-</script> -->
-
 <template>
-  <div
-    class="!h-screen !overflow-hidden flex flex-row w-full bg-gray-50 dark:bg-black"
-  >
-    <div class="flex flex-col w-full">
-      <div class="bg-gray-100 dark:bg-black">
-        <OrganismsToolbar />
-        <OrganismsMenubar />
-      </div>
-      <div class="max-w-7xl container mx-auto py-4">
-        <slot />
-      </div>
+  <div class="flex flex-col w-full bg-gray-50 dark:bg-black min-h-screen">
+    <OrganismsToolbar />
+    <OrganismsMenubar class="z-10 sticky top-0 w-full" />
+
+    <div class="max-w-8xl container mx-auto py-0">
+      <slot />
     </div>
   </div>
 </template>

@@ -12,6 +12,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nuxt/image": "^1.1.0",
     "@nuxt/ui": "^2.10.0",
     "@nuxtjs/supabase": "^1.1.4",
     "@pinia/nuxt": "^0.5.1",
@@ -21,7 +22,7 @@
     "@antfu/eslint-config": "^2.0.0",
     "@nuxt/devtools": "latest",
     "eslint": "^8.52.0",
-    "nuxt": "^3.8.0",
+    "nuxt": "^3.8.2",
     "nuxt-icon": "^0.6.1",
     "nuxt-primevue": "^0.2.0",
     "prettier": "^3.0.3",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface MenuItem {
-  label: string
-  path: string
+  label: string;
+  path: string;
 }
 
 defineProps({
@@ -12,10 +12,10 @@ defineProps({
   },
   header: {
     type: String,
-    default: '',
+    default: "",
     required: true,
   },
-})
+});
 </script>
 
 <template>
@@ -24,9 +24,10 @@ defineProps({
       {{ header }}
     </div>
     <div v-if="menuItems" class="flex flex-col space-y-4">
-      <div v-for="item, index in menuItems" :key="index">
+      <div v-for="(item, index) in menuItems" :key="index">
         <NuxtLink
-          :to="{ name: item.path }" class="capitalize text-lg font-semibold hover:underline underline-offset-4 decoration-2 decoration-red-500 mb-2"
+          :to="{ name: item.path }"
+          class="capitalize text-lg font-semibold hover:underline underline-offset-4 decoration-2 decoration-red-500 mb-2"
           active-class="underline decoration-2 decoration-red-500 mb-2 underline-offset-4"
         >
           {{ item.label }}

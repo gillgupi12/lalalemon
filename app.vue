@@ -14,7 +14,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="!bg-white h-screen">
+  <div class="min-h-screen">
     <div>
       <NuxtLayout>
         <UNotifications />
