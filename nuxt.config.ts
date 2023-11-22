@@ -7,33 +7,21 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: false },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue', 'nuxt-icon'],
-  css: [
-    '@/assets/tailwind/main.css',
-    'primeicons/primeicons.css',
-  ],
-  primevue: {
-    usePrimeVue: true,
-    cssLayerOrder: 'tailwind-base, primevue, tailwind-utilities',
-    options: {
-      ripple: true,
-      unstyled: true,
-    },
-    components: {
-      include: '*',
-    },
-    directives: {
-      include: '*',
-    },
-    composables: {
-      include: '*',
-    },
-  },
-  vite:{
-    build:{
-      rollupOptions:{
-        external: ['quill', 'chart.js','chart.js/auto']
-      }
+  modules: ['@nuxtjs/supabase', '@nuxt/ui', 'nuxt-icon', '@pinia/nuxt'],
+  supabase: {
+    redirectOptions: {
+      login: '/auth/login',
+      callback: '/confirm',
+      exclude: ['/auth/register'],
     }
   },
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASEURL || '',
+      supabaseKey: process.env.SUPABASEKEY || ''
+    }
+  },
+  ui: {
+    global: true,
+  }
 })

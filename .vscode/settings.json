@@ -1,0 +1,44 @@
+{
+    "css.validate": false,
+    "editor.formatOnSave": true,
+    "volar.autoCompleteRefs": true,
+    "volar.completion.preferredTagNameCase": "auto-kebab",
+    "volar.completion.preferredAttrNameCase": "auto-kebab",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "tailwindCSS.experimental.configFile": "tailwind.config.ts",
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+      "tailwindCSS.suggestions": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "tailwindCSS.experimental.classRegex": [
+        ["ui:\\s*{([^)]*)\\s*}", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        ["/\\*ui\\*/\\s*{([^;]*)}", ":\\s*[\"'`]([^\"'`]*).*?[\"'`]"]
+      ],
+      "tailwindCSS.classAttributes": [
+        "class",
+        "className",
+        "ngClass",
+        "ui"
+      ]
+
+    
+}
+  

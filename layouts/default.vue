@@ -6,9 +6,11 @@
 </script> -->
 
 <template>
-  <div class="!h-screen !overflow-hidden flex flex-row w-full bg-gray-50">
-    <div class="flex flex-col w-full ">
-      <div class="bg-gray-100">
+  <div
+    class="!h-screen !overflow-hidden flex flex-row w-full bg-gray-50 dark:bg-black"
+  >
+    <div class="flex flex-col w-full">
+      <div class="bg-gray-100 dark:bg-black">
         <OrganismsToolbar />
         <OrganismsMenubar />
       </div>
