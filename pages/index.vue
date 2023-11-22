@@ -97,7 +97,7 @@ const array = ref<any>([
 </script>
 
 <template>
-  <div class="container w-7xl mx-auto">
+  <div class="container w-8xl mx-auto">
     <div>
       <div class="flex flex-row gap-2 items-start">
         <div class="p-8">
@@ -113,7 +113,9 @@ const array = ref<any>([
           footer-description="Bestselling icons with a proven track record."
         />
       </div>
-      <Carousel :items="array" :items-per-slide="4" />
+      <div>
+        <Carousel :items="array" :items-per-slide="4" class="w-full" />
+      </div>
     </div>
   </div>
 </template>
