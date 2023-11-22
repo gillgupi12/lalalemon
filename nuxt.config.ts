@@ -1,4 +1,4 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { fileURLToPath } from 'url'
 export default defineNuxtConfig({
   app: {
     head: {
@@ -31,5 +31,11 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
+  },
+  alias: {
+    assets: fileURLToPath(new URL('./assets', import.meta.url)),
+    components: fileURLToPath(new URL('./components', import.meta.url)),
+    layouts: fileURLToPath(new URL('./layouts', import.meta.url)),
+    store: fileURLToPath(new URL('./store', import.meta.url)),
   },
 })

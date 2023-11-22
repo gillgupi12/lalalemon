@@ -1,6 +1,6 @@
 <script setup>
-import GenderSideBar from "../../components/organisms/gender/sidebar.vue";
-import GenderHeader from "../../components/organisms/gender/header.vue";
+import GenderSideBar from "components/organisms/gender/sidebar.vue";
+import GenderHeader from "components/organisms/gender/header.vue";
 
 const menuItems = [
   {

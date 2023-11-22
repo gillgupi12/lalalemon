@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HeroSideBar from "../../lalalemon/components/organisms/hero/sidebar.vue";
-import HeroHeader from "../../lalalemon/components/organisms/hero/header.vue";
-import Carousel from "../../lalalemon/components/organisms/gender/carousel.vue";
+import HeroSideBar from "components/organisms/hero/sidebar.vue";
+import HeroHeader from "components/organisms/hero/header.vue";
+import Carousel from "components/organisms/gender/carousel.vue";
 
 const menuItems = [
   {

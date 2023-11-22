@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import baseToggleColor from "../atoms/base-toggle-color.vue";
+import baseToggleColor from "components/atoms/base-toggle-color.vue";
 const toolbarItems = [
   {
     label: "Track Order",

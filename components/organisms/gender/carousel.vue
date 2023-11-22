@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ProductCard from "../../organisms/product/card.vue";
+import ProductCard from "components/organisms/product/card.vue";
 const props = defineProps({
   items: { type: Array, default: [], required: true },
   itemsPerSlide: { type: Number, default: 4, required: false },

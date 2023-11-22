@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { routerKey } from "vue-router";
-
 const props = defineProps({
   imagePath: { type: String, default: "", required: true },
   title: { type: String, default: "", required: true },
