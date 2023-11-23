@@ -4,11 +4,11 @@
   <div class="!bg-gray-200 w-full border-t">
     <UContainer class="p-10 flex items-center flex-col space-y-6">
       <div class="text-center flex flex-col gap-2">
-        <p class="text-4xl font-bold">
+        <p class="text-xl sm:text-4xl font-bold">
           Our freshest gear. Straight to your inbox.
         </p>
 
-        <p class="font-semibold text-2xl">
+        <p class="font-semibold text-base sm:text-2xl">
           Be first to know about our newest products, limited-time offers,
           community events, and more.
         </p>
@@ -19,7 +19,7 @@
         <UCheckbox label="Men's" />
       </div>
       <div class="flex flex-col items-center">
-        <div class="flex flex-row gap-2">
+        <div class="flex flex-col gap-2 sm:flex-row">
           <UInput
             placeholder="Enter your email address"
             size="xl"
@@ -29,7 +29,7 @@
             label="SIGN UP"
             size="xl"
             color="black"
-            class="px-10 rounded"
+            class="px-10 rounded flex items-center justify-center"
           ></UButton>
         </div>
         <div class="flex flex-col text-center text-gray-500 pt-2">
