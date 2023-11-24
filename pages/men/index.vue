@@ -27,10 +27,6 @@ const menuItems = [
     label: "Shorts",
     path: "men-shorts",
   },
-  {
-    label: "Accessories",
-    path: "men-accessories",
-  },
 ];
 </script>
 

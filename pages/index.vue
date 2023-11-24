@@ -42,58 +42,24 @@ const menuItems = [
   },
 ];
 
-const array = ref<any>([
-  {
-    name: "Steady State Half zip",
-    price: 1180,
-    image: "/images/men/products/1.webp",
-    imageAlt: "Steady State Half zip",
-  },
-  {
-    name: "Sueded Cargo Pant",
-    price: 1280,
-    image: "/images/men/products/2.webp",
-    imageAlt: "Sueded Cargo Pant",
-  },
-  {
-    name: "Sueded Utility Jacket",
-    price: 1780,
-    image: "/images/men/products/3.webp",
-    imageAlt: "Sueded  Utility Jacket",
-  },
-  {
-    name: "Alpaca Wool-Blend Crewneck Sweater",
-    price: 1780,
-    image: "/images/men/products/4.webp",
-    imageAlt: "Alpaca Wool-Blend Crewneck Sweater",
-  },
-  {
-    name: "Sueded Utility Jacket",
-    price: 1780,
-    image: "/images/men/products/3.webp",
-    imageAlt: "Sueded  Utility Jacket",
-  },
-  {
-    name: "Steady State Half zip",
-    price: 1180,
-    image: "/images/men/products/1.webp",
-    imageAlt: "Steady State Half zip",
-  },
+const supabase = useSupabaseClient();
 
-  {
-    name: "Alpaca Wool-Blend Crewneck Sweater",
-    price: 1780,
-    image: "/images/men/products/4.webp",
-    imageAlt: "Alpaca Wool-Blend Crewneck Sweater",
-  },
+const allProducts = ref();
+const loading = ref(false);
 
-  {
-    name: "Sueded Cargo Pant",
-    price: 1280,
-    image: "/images/men/products/2.webp",
-    imageAlt: "Sueded Cargo Pant",
-  },
-]);
+const fetchProducts = async () => {
+  loading.value = true;
+  const { data, error } = await supabase.from("products").select().range(0, 7);
+
+  if (data) {
+    allProducts.value = data;
+  }
+  loading.value = false;
+};
+
+onMounted(async () => {
+  await fetchProducts();
+});
 </script>
 
 <template>
@@ -114,7 +80,7 @@ const array = ref<any>([
         />
       </div>
       <div>
-        <Carousel :items="array" :items-per-slide="4" class="w-full" />
+        <Carousel :items="allProducts" :items-per-slide="4" class="w-full" />
       </div>
     </div>
   </div>

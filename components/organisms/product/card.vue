@@ -10,12 +10,15 @@ const redirectToItem = (item: any) => {
 
 <template>
   <div class="h-[450px] overflow-hidden">
-    <div class="flex flex-col items-stretch" @click="redirectToItem(item)">
+    <div
+      class="flex flex-col items-stretch max-w-fit"
+      @click="redirectToItem(item)"
+    >
       <div class="relative h-96 overflow-hidden">
-        <img
-          :src="item.image"
-          :alt="item.imageAlt"
-          class="h-full w-full object-cover"
+        <NuxtImg
+          :src="item.imageUrl"
+          :alt="item.imageAltDescription"
+          class="h-full w-full object-contain"
         />
       </div>
       <div class="">
