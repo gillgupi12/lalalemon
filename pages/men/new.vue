@@ -20,21 +20,16 @@ const getFromAndTo = () => {
   return { from, to };
 };
 
-const getTotalCount = async () => {
-  const { data, error, count } = await supabase
-    .from("products")
-    .select("", { count: "exact" });
-  if (count) {
-    totalCount.value = count;
-  }
-};
-
 const getProductInfos = async () => {
-  const { data, error } = await supabase.rpc("get_product_with_inventory");
+  loading.value = true;
+  const { data, error, count } = await supabase.rpc(
+    "get_product_with_inventory"
+  );
 
   if (data) {
     allProducts.value = data;
   }
+  loading.value = false;
 };
 
 const fetchProductswithFilters = async (categoryIds: number) => {
@@ -48,17 +43,13 @@ const fetchProductswithFilters = async (categoryIds: number) => {
   }
   loading.value = false;
 };
-
-onMounted(() => {
-  getTotalCount();
-});
 </script>
 
 <template>
   <div class="container w-7xl mx-auto">
     <UProgress animation="carousel" v-if="loading" size="sm" color="red" />
     <div>
-      <div class="grid grid-cols-4 pt-10 gap-4">
+      <div class="sm:grid grid-cols-4 pt-10 gap-4">
         <div class="col-span-1">
           <ProductFilter
             @filter="fetchProductswithFilters"
@@ -70,26 +61,19 @@ onMounted(() => {
             <p v-if="!totalFilteredCount" class="font-bold text-sm">
               {{ totalCount }} products
             </p>
-            <p class="font-bold text-sm">{{ totalFilteredCount }} products</p>
           </div>
-          <div class="grid grid-cols-3 gap-4">
+          <div
+            class="flex flex-col sm:grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 p-4"
+          >
             <div
               v-for="(product, index) of allProducts"
               :key="index"
-              class="col-span-1"
+              class="col-span-1 border bg-white"
             >
-              <ProductCard v-if="product" :item="product" />
+              <ProductCard :item="product" />
             </div>
           </div>
         </div>
-      </div>
-      <div class="flex w-full items-center justify-center pb-10">
-        <!-- <UButton
-          class="py-3 px-8 rounded uppercase"
-          color="black"
-          @click="fetchProducts()"
-          >View More</UButton
-        > -->
       </div>
     </div>
   </div>
