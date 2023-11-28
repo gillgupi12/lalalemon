@@ -6,7 +6,7 @@ const loading = ref(false);
 const allCategories = ref();
 const fetchCategories = async () => {
   loading.value = true;
-  const { data, error } = await supabase.from("categories").select();
+  const { data, error } = await supabase.from("categories").select("*");
 
   if (data) {
     allCategories.value = data.map((category: any) => {

@@ -10,6 +10,7 @@ const errorMessage = ref();
 const successMessage = ref();
 const toast = useToast();
 const { userData } = storeToRefs(useAuthStore());
+const { getAllColors } = useColorStore();
 const loading = ref(false);
 
 const validate = (state: any): FormError[] => {
@@ -35,6 +36,8 @@ async function onSubmit(event: FormSubmitEvent<any>) {
         timeout: 3000,
         color: "green",
       });
+
+      await getAllColors();
       router.push("/");
     }
     if (error) throw error;

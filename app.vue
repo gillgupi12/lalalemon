@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const client = useSupabaseClient();
 const { userData } = storeToRefs(useAuthStore());
+const { getAllColors } = useColorStore();
 
 const layout = ref<MaybeRef<string | false | undefined>>();
 
@@ -9,6 +10,7 @@ onMounted(async () => {
     data: { user },
   } = await client.auth.getUser();
   if (user) {
+    await getAllColors();
     userData.value = user;
   }
 });
