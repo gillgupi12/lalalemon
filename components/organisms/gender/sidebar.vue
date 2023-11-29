@@ -19,7 +19,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="overflow-scroll w-screen md:w-full">
+  <div>
     <div
       class="flex items-center py-4 text-base justify-center md:text-4xl break-words font-bold"
     >
@@ -27,7 +27,7 @@ defineProps({
     </div>
     <div
       v-if="menuItems"
-      class="flex flex-row gap-4 border-b p-2 md:p-0 text-sm md:text-base border-t md:border-none md:flex-col md:space-y-4 md:gap-0"
+      class="overflow-scroll w-screen md:w-full flex flex-row gap-4 border-b p-2 md:p-0 text-sm md:text-base border-t md:border-none md:flex-col md:space-y-4 md:gap-0"
     >
       <div v-for="(item, index) in menuItems" :key="index">
         <NuxtLink
