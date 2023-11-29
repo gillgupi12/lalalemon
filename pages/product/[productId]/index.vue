@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import ImageCarousel from "components/organisms/common/image-carousel.vue";
+import ProductCrumb from "components/organisms/product/crumbs.vue";
 
 const route = useRoute();
 const productId = route.params.productId.toString();
 const supabase = useSupabaseClient();
 const selectedProduct = ref();
 const { getColor } = useColorStore();
+
 const getProduct = async () => {
   const { data, error } = await supabase
     .rpc("get_product_with_inventory")
@@ -32,19 +33,6 @@ const onColorChange = (data: any) => {
 const onSizeSelect = (data: any) => {
   selectedSize.value = data;
 };
-
-const links = [
-  {
-    label: "Men",
-    to: "/men",
-  },
-  {
-    label: "Navigation",
-  },
-  {
-    label: "Breadcrumb",
-  },
-];
 </script>
 
 <template>
@@ -53,20 +41,37 @@ const links = [
   >
     <div v-if="selectedProduct" class="sm:grid grid-cols-2 gap-10 w-full">
       <div class="sm:hidden">
-        <UBreadcrumb :links="links" />
+        <div class="flex flex-row gap-2">
+          <ProductCrumb
+            :gender="selectedProduct?.gender"
+            :categoryId="selectedProduct?.category_id"
+          />
+        </div>
       </div>
       <div>
         <div v-for="image in selectedProduct.inventory" class="overflow-hidden">
-          <div v-if="image.color_id === selectedColorId">
+          <div v-show="image.color_id === selectedColorId">
             <div v-for="images in image.images">
-              <ImageCarousel v-if="images?.length > 0" :images="images" />
+              <carousel :wrapAround="true" snapAlign="start">
+                <slide v-for="image in images" :key="images">
+                  <NuxtImg :src="image" width="1200px" height="1200px" />
+                </slide>
+
+                <template #addons>
+                  <navigation />
+                  <pagination />
+                </template>
+              </carousel>
             </div>
           </div>
         </div>
       </div>
       <div class="flex flex-col space-y-3">
         <div class="hidden sm:flex">
-          <UBreadcrumb :links="links" />
+          <ProductCrumb
+            :gender="selectedProduct?.gender"
+            :categoryId="selectedProduct?.category_id"
+          />
         </div>
         <div class="flex flex-col space-y-1">
           <div class="text-3xl font-bold">{{ selectedProduct.name }}</div>
