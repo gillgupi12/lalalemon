@@ -1,6 +1,9 @@
 <script setup>
 import Card from "components/organisms/common/card.vue";
 const router = useRouter();
+useHead({
+  title: "Profile | Lalalemon",
+});
 </script>
 
 <template>

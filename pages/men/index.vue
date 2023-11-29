@@ -28,6 +28,9 @@ const menuItems = [
     path: "men-shorts",
   },
 ];
+useHead({
+  title: "Men's | Lalalemon",
+});
 </script>
 
 <template>

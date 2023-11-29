@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import LoginComponent from "components/organisms/auth/login.vue";
 import RegisterComponent from "components/organisms/auth/register.vue";
-import FooterCTA from "components/organisms/footer/cta.vue";
 
 useHead({
   title: "Lalalemon | Login",
@@ -19,6 +18,9 @@ const items = [
     description: "Create An Account",
   },
 ];
+useHead({
+  title: "Login | Lalalemon",
+});
 </script>
 
 <template>

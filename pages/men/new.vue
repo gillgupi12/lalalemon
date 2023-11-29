@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import ProductCard from "components/organisms/product/card.vue";
+import ProductCardSkeleton from "components/organisms/product/card-skeleton.vue";
 import ProductFilter from "components/organisms/gender/filter.vue";
 const supabase = useSupabaseClient();
 
-const allProducts = ref([]);
+const allProducts = ref(new Array(9));
 const totalCount = ref();
 const totalFilteredCount = ref();
-const loading = ref(false);
+const loading = ref(true);
 const page = ref(0);
 
 const getFromAndTo = () => {
@@ -46,31 +47,42 @@ const fetchProductswithFilters = async (categoryIds: number) => {
 </script>
 
 <template>
-  <div class="container w-7xl mx-auto">
+  <div>
     <UProgress animation="carousel" v-if="loading" size="sm" color="red" />
-    <div>
-      <div class="sm:grid grid-cols-4 pt-10 gap-4">
-        <div class="col-span-1">
-          <ProductFilter
-            @filter="fetchProductswithFilters"
-            @nofilter="getProductInfos"
-          />
-        </div>
-        <div class="col-span-3 flex flex-col gap-2 max-w-fit">
-          <div class="w-full flex place-content-end">
-            <p v-if="!totalFilteredCount" class="font-bold text-sm">
-              {{ totalCount }} products
-            </p>
+    <div class="container w-7xl mx-auto min-h-screen">
+      <div>
+        <div class="sm:grid grid-cols-4 pt-10 gap-4">
+          <div class="col-span-1">
+            <div>
+              <ProductFilter
+                @filter="fetchProductswithFilters"
+                @nofilter="getProductInfos"
+              />
+            </div>
           </div>
-          <div
-            class="flex flex-col sm:grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 p-4"
-          >
-            <div
-              v-for="(product, index) of allProducts"
-              :key="index"
-              class="col-span-1 border bg-white"
-            >
-              <ProductCard :item="product" />
+          <div class="col-span-3 flex flex-col gap-2">
+            <div class="w-full flex place-content-end">
+              <USkeleton v-if="loading" class="h-4 w-[250px]" />
+              <div v-else>
+                <p v-if="!totalFilteredCount" class="font-bold text-sm">
+                  {{ totalCount }} products
+                </p>
+              </div>
+            </div>
+
+            <div class="w-full">
+              <div
+                class="flex flex-col sm:grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 p-4 justify-stretch"
+              >
+                <div
+                  v-for="(product, index) of allProducts"
+                  :key="index"
+                  class="w-full"
+                >
+                  <ProductCardSkeleton v-if="loading" />
+                  <ProductCard v-else-if="product" :item="product" />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -61,7 +61,9 @@ const items = [
       <template #category-filter>
         <div class="flex flex-col space-y-1 px-4">
           <div v-for="(categories, index) in allCategories" :key="index">
+            <USkeleton v-if="loading" class="w-full h-4 mb-1 mt-1" />
             <UCheckbox
+              v-else
               v-model="categories.selected"
               name="categories"
               class="capitalize"

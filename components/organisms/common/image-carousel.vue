@@ -53,6 +53,7 @@ const itemsPerSlide = computed(() => {
   return 1;
 });
 const updateViewportWidth = () => {
+  console.log("called");
   viewportWidth.value = window.innerWidth;
 };
 
@@ -100,9 +101,9 @@ onUnmounted(() => {
         <div
           v-for="(item, i) of productsToShow"
           :key="i"
-          class="cursor-pointer"
+          class="cursor-pointer border flex items-end"
         >
-          <NuxtImg :src="item" />
+          <NuxtImg :src="item" format="webp" />
         </div>
 
         <UButton

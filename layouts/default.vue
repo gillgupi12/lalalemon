@@ -2,7 +2,7 @@
 import HeroFooter from "components/organisms/footer/index.vue";
 </script>
 <template>
-  <div class="flex flex-col w-full bg-slate-50 dark:bg-black min-h-screen">
+  <div class="flex flex-col w-full bg-white dark:bg-black min-h-screen">
     <OrganismsToolbar />
     <OrganismsMenubar class="z-10 sticky top-0 w-full" />
 

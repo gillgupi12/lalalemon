@@ -49,7 +49,10 @@ const loading = ref(false);
 
 const fetchProducts = async () => {
   loading.value = true;
-  const { data, error } = await supabase.from("products").select().range(0, 7);
+  const { data, error } = await supabase
+    .rpc("get_product_with_inventory")
+    .select()
+    .range(0, 7);
 
   if (data) {
     allProducts.value = data;

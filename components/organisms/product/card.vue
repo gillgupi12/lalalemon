@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import ImageCarousel from "../common/image-carousel.vue";
 const props = defineProps({
-  item: { type: Object || String || null, required: true },
+  item: { type: Object, required: true },
+  loading: { type: Boolean, required: false, default: false },
 });
 
-const redirectToItem = (item: any) => {
-  console.log(item);
-};
 const router = useRouter();
 const { getColor } = useColorStore();
 
 const selectedColor = ref();
-
 onMounted(() => {
   if (
     props.item &&
@@ -20,27 +17,30 @@ onMounted(() => {
   )
     selectedColor.value = props.item?.inventory[0]?.color_id;
 });
-
 const onColorSelect = (colorId: string) => {
   selectedColor.value = colorId;
+};
+
+const goToItem = (productId: string) => {
+  console.log(productId);
+  router.push({
+    name: "product-productId",
+    params: { productId },
+  });
 };
 </script>
 
 <template>
-  <div class="overflow-hidden p-2">
-    <div class="flex flex-col">
-      <div v-for="data in item.inventory" class="pb-1">
-        <div v-if="selectedColor === data.color_id">
-          <div v-if="data.images" v-for="images in data.images">
+  <div class="overflow-hidden p-2" @click="goToItem(item.id)">
+    <div v-if="item && item.inventory" class="flex flex-col">
+      <div v-for="(data, i) in item.inventory" :key="i" class="overflow-hidden">
+        <div v-for="(images, index) in data?.images" :key="index">
+          <div v-if="data.color_id === selectedColor">
             <ImageCarousel
-              v-if="images && data.images.length > 0"
               :images="images"
               :hide-dots="true"
               :hide-arrow="true"
             />
-          </div>
-          <div v-else>
-            <NuxtImg src="https://placehold.co/1200x1200" />
           </div>
         </div>
       </div>

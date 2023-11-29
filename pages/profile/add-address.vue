@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import AddNewAddress from "components/organisms/forms/add-new-address.vue";
+
+useHead({
+  title: "Add Address | Lalalemon",
+});
 </script>
 
 <template>

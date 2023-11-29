@@ -35,11 +35,11 @@ const previousSlide = () => {
   }
 };
 
-const productsToShow = computed(() => {
+const productsToShow = () => {
   const start = activeSlideIndex.value * itemsPerSlide.value;
   const end = start + itemsPerSlide.value;
   return props.items.slice(start, end) as [];
-});
+};
 
 const goToSlide = (index: number) => {
   console.log(index);
@@ -69,7 +69,7 @@ let autoSlideInterval: NodeJS.Timeout | null = null;
 
 const startAutoSlide = () => {
   stopAutoSlide(); // Clear any existing interval first
-  autoSlideInterval = setInterval(nextSlide, 4000);
+  autoSlideInterval = setInterval(nextSlide, 5000);
 };
 const stopAutoSlide = () => {
   if (autoSlideInterval) {
@@ -82,7 +82,6 @@ onMounted(() => {
   if (process.client) {
     viewportWidth.value = window.innerWidth;
     window?.addEventListener("resize", updateViewportWidth);
-    startAutoSlide();
   }
 });
 
@@ -104,7 +103,7 @@ onUnmounted(() => {
           <Icon name="material-symbols:arrow-back-ios-new" />
         </UButton>
 
-        <div v-for="(item, i) of productsToShow" :key="i">
+        <div v-for="(item, i) of productsToShow()" :key="i">
           <ProductCard :item="item" />
         </div>
 

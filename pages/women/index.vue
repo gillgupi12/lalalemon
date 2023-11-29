@@ -32,6 +32,9 @@ const menuItems = [
     path: "women-accessories",
   },
 ];
+useHead({
+  title: "Women's | Lalalemon",
+});
 </script>
 
 <template>

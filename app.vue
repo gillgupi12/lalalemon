@@ -14,6 +14,9 @@ onMounted(async () => {
     userData.value = user;
   }
 });
+useHead({
+  title: "Lalalemon",
+});
 </script>
 <template>
   <div class="min-h-screen">
