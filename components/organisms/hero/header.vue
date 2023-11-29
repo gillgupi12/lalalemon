@@ -15,7 +15,7 @@ const router = useRouter();
   <div class="flex flex-col gap-4">
     <div class="relative">
       <img :src="imagePath" :alt="imageAltDescription" />
-      <div class="absolute bottom-10 right-5 flex flex-col gap-2">
+      <div class="py-4 px-2 md:absolute bottom-10 right-5 flex flex-col gap-2">
         <UButton
           color="white"
           class="border-black text-sm border uppercase text-center font-bold py-4 px-4 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
@@ -33,7 +33,7 @@ const router = useRouter();
         />
       </div>
     </div>
-    <h3 class="text-3xl">
+    <h3 class="text-xl px-2 md:text-3xl">
       {{ footerDescription }}
     </h3>
   </div>

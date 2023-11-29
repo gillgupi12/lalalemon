@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import type { RouteParamValueRaw } from "vue-router";
-
 interface MenuItem {
   label: string;
   path: string;
-  params?: any;
 }
 
 defineProps({
@@ -22,15 +19,20 @@ defineProps({
 </script>
 
 <template>
-  <div class="w-[200px] flex flex-col space-y-6">
-    <div class="text-4xl break-words font-bold">
+  <div class="overflow-scroll w-screen md:w-full">
+    <div
+      class="flex items-center py-4 text-base justify-center md:text-4xl break-words font-bold"
+    >
       {{ header }}
     </div>
-    <div v-if="menuItems" class="flex flex-col space-y-4">
+    <div
+      v-if="menuItems"
+      class="flex flex-row gap-4 border-b p-2 md:p-0 text-sm md:text-base border-t md:border-none md:flex-col md:space-y-4 md:gap-0"
+    >
       <div v-for="(item, index) in menuItems" :key="index">
         <NuxtLink
-          :to="{ name: item.path, params: item?.params }"
-          class="capitalize text-base hover:underline underline-offset-4 decoration-2 decoration-red-500 mb-2"
+          :to="{ name: item.path }"
+          class="capitalize hover:underline underline-offset-4 decoration-2 decoration-red-500 mb-2 truncate"
           active-class="underline decoration-2 decoration-red-500 mb-2 underline-offset-4"
         >
           {{ item.label }}

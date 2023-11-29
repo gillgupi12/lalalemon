@@ -21,7 +21,7 @@ useHead({
 });
 </script>
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen overflow-hidden">
     <div>
       <NuxtLayout>
         <UNotifications />

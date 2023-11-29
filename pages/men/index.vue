@@ -34,9 +34,9 @@ useHead({
 </script>
 
 <template>
-  <div class="container w-7xl mx-auto">
-    <div class="flex flex-row gap-2 items-start">
-      <div class="p-8">
+  <div class="md:container md:w-8xl mx-auto">
+    <div class="flex flex-col md:flex-row gap-2 items-start">
+      <div class="md:p-8">
         <GenderSideBar header="lalalemon men's" :menu-items="menuItems" />
       </div>
       <GenderHeader

@@ -81,10 +81,10 @@ const breakpoints = {
 </script>
 
 <template>
-  <div class="container w-8xl mx-auto">
+  <div class="md:container md:w-8xl mx-auto">
     <div>
-      <div class="flex flex-row gap-2 items-start">
-        <div class="p-8">
+      <div class="flex flex-col md:flex-row gap-2 items-start">
+        <div class="md:p-8">
           <HeroSideBar header="lalalemon" :menu-items="menuItems" />
         </div>
         <HeroHeader
