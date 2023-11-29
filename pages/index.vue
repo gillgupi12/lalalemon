@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import HeroSideBar from "components/organisms/hero/sidebar.vue";
 import HeroHeader from "components/organisms/hero/header.vue";
-import Carousel from "components/organisms/gender/carousel.vue";
+
+import ProductCard from "components/organisms/product/card.vue";
 
 const menuItems = [
   {
@@ -36,10 +37,10 @@ const menuItems = [
     label: "Men's Hoodies",
     path: "men-hoodies",
   },
-  {
-    label: "Accessories",
-    path: "accessories",
-  },
+  // {
+  //   label: "Accessories",
+  //   path: "accessories",
+  // },
 ];
 
 const supabase = useSupabaseClient();
@@ -63,6 +64,20 @@ const fetchProducts = async () => {
 onMounted(async () => {
   await fetchProducts();
 });
+const breakpoints = {
+  // 700px and up
+  700: {
+    itemsToShow: 3,
+    snapAlign: "start",
+    itemsToScroll: 3,
+  },
+  // 1024 and up
+  1024: {
+    itemsToShow: 4,
+    snapAlign: "start",
+    itemsToScroll: 4,
+  },
+};
 </script>
 
 <template>
@@ -82,8 +97,21 @@ onMounted(async () => {
           footer-description="Bestselling icons with a proven track record."
         />
       </div>
-      <div>
-        <Carousel :items="allProducts" :items-per-slide="4" class="w-full" />
+      <div class="py-10">
+        <carousel
+          :wrapAround="true"
+          snapAlign="start"
+          :breakpoints="breakpoints"
+        >
+          <slide v-for="product in allProducts" :key="product">
+            <ProductCard :item="product" />
+          </slide>
+
+          <template #addons>
+            <navigation />
+            <pagination />
+          </template>
+        </carousel>
       </div>
     </div>
   </div>

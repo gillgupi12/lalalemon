@@ -7,6 +7,7 @@ const props = defineProps({
 });
 
 const activeSlideIndex = ref(0);
+const emits = defineEmits(["updateSelectedColor"]);
 const totalSlides = computed(() => {
   if (viewportWidth.value > 1200) {
     return Math.ceil(props.images.length / itemsPerSlide.value);
@@ -72,63 +73,61 @@ const stopAutoSlide = () => {
 };
 
 onMounted(() => {
-  if (process.client) {
-    viewportWidth.value = window.innerWidth;
-    window?.addEventListener("resize", updateViewportWidth);
-    // startAutoSlide();
-  }
+  // if (process.client) {
+  //   viewportWidth.value = window.innerWidth;
+  //   window?.addEventListener("resize", updateViewportWidth);
+  //   // startAutoSlide();
+  // }
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", updateViewportWidth);
-  stopAutoSlide();
+  // window.removeEventListener("resize", updateViewportWidth);
+  // stopAutoSlide();
 });
 </script>
 
 <template>
-  <ClientOnly>
-    <div class="flex flex-col items-center">
-      <div class="flex flex-row pb-2 items-center gap-3 relative">
-        <UButton
-          v-if="!hideArrow"
-          @click="previousSlide"
-          color="white"
-          class="z-10 text-black bg-opacity-50 hover:bg-slate-100 absolute top-50 left-4 hidden sm:block"
-        >
-          <Icon name="material-symbols:arrow-back-ios-new" />
-        </UButton>
+  <div class="flex flex-col w-full items-center pb-2">
+    <div class="flex flex-row pb-2 gap-3 relative items-center">
+      <UButton
+        v-if="!hideArrow"
+        @click="previousSlide"
+        color="white"
+        class="z-10 text-black bg-opacity-50 hover:bg-slate-100 absolute top-50 left-4 hidden sm:block"
+      >
+        <Icon name="material-symbols:arrow-back-ios-new" />
+      </UButton>
 
-        <div
-          v-for="(item, i) of productsToShow"
-          :key="i"
-          class="cursor-pointer border flex items-end"
-        >
-          <NuxtImg :src="item" format="webp" />
-        </div>
-
-        <UButton
-          v-if="!hideArrow"
-          @click="nextSlide"
-          color="white"
-          class="text-black bg-opacity-50 hover:bg-slate-100 absolute top-50 right-4 hidden sm:block"
-        >
-          <Icon name="material-symbols:arrow-back-ios-new" class="rotate-180" />
-        </UButton>
+      <div
+        v-for="(item, i) of productsToShow"
+        :key="i"
+        class="cursor-pointer w-full"
+      >
+        <NuxtImg :src="item" width="1200px" height="1200px" />
       </div>
-      <div v-if="!hideDots" class="flex flex-row gap-2 items-center">
-        <div v-for="slide in totalSlides" :key="slide">
-          <div
-            v-if="activeSlideIndex + 1 === slide"
-            @click="goToSlide(slide)"
-            class="rounded-full bg-black w-3 h-3 cursor-pointer"
-          ></div>
-          <div
-            v-else
-            @click="goToSlide(slide)"
-            class="rounded-full bg-slate-500 w-3 h-3 cursor-pointer"
-          ></div>
-        </div>
+
+      <UButton
+        v-if="!hideArrow"
+        @click="nextSlide"
+        color="white"
+        class="text-black bg-opacity-50 hover:bg-slate-100 absolute top-50 right-4 hidden sm:block"
+      >
+        <Icon name="material-symbols:arrow-back-ios-new" class="rotate-180" />
+      </UButton>
+    </div>
+    <div v-if="!hideDots" class="flex flex-row gap-2 items-center">
+      <div v-for="slide in totalSlides" :key="slide">
+        <div
+          v-if="activeSlideIndex + 1 === slide"
+          @click="goToSlide(slide)"
+          class="rounded-full bg-black w-3 h-3 cursor-pointer"
+        ></div>
+        <div
+          v-else
+          @click="goToSlide(slide)"
+          class="rounded-full bg-slate-500 w-3 h-3 cursor-pointer"
+        ></div>
       </div>
     </div>
-  </ClientOnly>
+  </div>
 </template>

@@ -15,9 +15,18 @@ onMounted(() => {
     props.item.inventory.length > 0 &&
     props.item.inventory[0].color_id
   )
-    selectedColor.value = props.item?.inventory[0]?.color_id;
+    console.log(props.item, props.item?.inventory[0]?.color_id);
+  selectedColor.value = props.item?.inventory[0]?.color_id;
 });
+
+watch(
+  () => props.item,
+  () => {
+    selectedColor.value = props.item?.inventory[0]?.color_id;
+  }
+);
 const onColorSelect = (colorId: string) => {
+  console.log(selectedColor.value);
   selectedColor.value = colorId;
 };
 
@@ -31,15 +40,16 @@ const goToItem = (productId: string) => {
 </script>
 
 <template>
-  <div class="overflow-hidden p-2" @click="goToItem(item.id)">
+  <div class="overflow-hidden p-2">
     <div v-if="item && item.inventory" class="flex flex-col">
       <div v-for="(data, i) in item.inventory" :key="i" class="overflow-hidden">
         <div v-for="(images, index) in data?.images" :key="index">
-          <div v-if="data.color_id === selectedColor">
+          <div v-if="data.color_id === selectedColor" class="relative">
             <ImageCarousel
               :images="images"
               :hide-dots="true"
               :hide-arrow="true"
+              @click="goToItem(item.id)"
             />
           </div>
         </div>

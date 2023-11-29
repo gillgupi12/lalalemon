@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: false },
-  modules: ['@nuxtjs/supabase', '@nuxt/image', '@nuxt/ui', 'nuxt-icon', '@pinia/nuxt'],
+  modules: ['@nuxtjs/supabase', '@nuxt/image', '@nuxt/ui', 'nuxt-icon', '@pinia/nuxt', 'vue3-carousel-nuxt'],
   supabase: {
     redirectOptions: {
       login: '/auth/login',

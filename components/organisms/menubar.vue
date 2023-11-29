@@ -12,10 +12,10 @@ const toolbarItems = [
     label: "Men",
     path: "/men",
   },
-  {
-    label: "Accessories",
-    path: "/accessories",
-  },
+  // {
+  //   label: "Accessories",
+  //   path: "/accessories",
+  // },
   // {
   //   label: "Community",
   //   path: "/community",
