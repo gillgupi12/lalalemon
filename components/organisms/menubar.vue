@@ -34,29 +34,118 @@ const logout = async () => {
   userData.value = null;
   router.push("/auth/login");
 };
+
+const toggleMobile = ref(false);
+const openMobileNav = () => {
+  toggleMobile.value = !toggleMobile.value;
+};
+
+const items = [
+  {
+    label: "Men",
+
+    defaultOpen: false,
+    slot: "men",
+  },
+  {
+    label: "Women",
+    defaultOpen: false,
+    slot: "women",
+  },
+];
+
+const menItems = [
+  {
+    label: "What is New",
+    path: "men-new",
+  },
+  {
+    label: "Bestsellers",
+    path: "men-best-sellers",
+  },
+  {
+    label: "Pants",
+    path: "men-pants",
+  },
+  {
+    label: "Hoodies",
+    path: "men-hoodies",
+  },
+  {
+    label: "Jackets",
+    path: "men-jackets",
+  },
+  {
+    label: "Shorts",
+    path: "men-shorts",
+  },
+];
+const womenItems = [
+  {
+    label: "What is New",
+    path: "women-new",
+  },
+  {
+    label: "Bestsellers",
+    path: "women-best-sellers",
+  },
+  {
+    label: "Pants",
+    path: "women-pants",
+  },
+  {
+    label: "Hoodies",
+    path: "women-hoodies",
+  },
+  {
+    label: "Jackets",
+    path: "women-jackets",
+  },
+  {
+    label: "Matching Sets",
+    path: "women-matching-sets",
+  },
+  {
+    label: "Accessories",
+    path: "women-accessories",
+  },
+];
+
+const handleLink = (link: string) => {
+  router.push({ name: link });
+  openMobileNav();
+};
 </script>
 
 <template>
   <div
-    class="md:flex flex-row text-black py-3 w-full shadow-sm hidden bg-white border-t border-b dark:bg-gray-50 dark:text-black px-4"
+    class="flex flex-row items-center gap-2 text-black py-3 w-full shadow-sm bg-white border-t border-b dark:bg-gray-50 dark:text-black px-4"
   >
-    <div class="flex max-w-8xl container justify-between flex-row mx-auto">
-      <div class="flex flex-row items-center space-x-8">
-        <NuxtLink to="/">
-          <Logo />
-        </NuxtLink>
-        <div class="flex flex-row space-x-8 text-lg px-4">
-          <div v-for="(toolbarItem, index) in toolbarItems" :key="index">
-            <NuxtLink
-              :to="toolbarItem.path"
-              class="uppercase text-sm font-bold hover:underline underline-offset-4 decoration-2 decoration-red-500 mb-2"
-              active-class="underline decoration-2 decoration-red-500 mb-2 underline-offset-4"
-            >
-              {{ toolbarItem.label }}
-            </NuxtLink>
-          </div>
+    <div
+      class="flex max-w-8xl container justify-between flex-row mx-auto w-full"
+    >
+      <div
+        class="md:hidden cursor-pointer hover:text-red-500"
+        @click="openMobileNav"
+      >
+        <Icon name="prime:bars" size="28" />
+      </div>
+      <NuxtLink to="/">
+        <Logo />
+      </NuxtLink>
+
+      <div class="hidden md:flex flex-row space-x-8 text-lg px-4">
+        <div v-for="(toolbarItem, index) in toolbarItems" :key="index">
+          <NuxtLink
+            :to="toolbarItem.path"
+            class="uppercase text-sm font-bold hover:underline underline-offset-4 decoration-2 decoration-red-500 mb-2"
+            active-class="underline decoration-2 decoration-red-500 mb-2 underline-offset-4"
+          >
+            {{ toolbarItem.label }}
+          </NuxtLink>
         </div>
       </div>
+
       <div class="flex flex-row items-center gap-4">
         <UPopover mode="hover" :popper="{ offsetDistance: 0 }">
           <NuxtLink :to="{ name: 'profile' }">
@@ -116,5 +205,81 @@ const logout = async () => {
         </NuxtLink>
       </div>
     </div>
+    <USlideover v-model="toggleMobile" side="left">
+      <UCard
+        class="flex flex-col flex-1"
+        :ui="{
+          body: { base: 'flex-1 !p-0' },
+          ring: '',
+          divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+        }"
+      >
+        <template #header>
+          <div class="flex flex-row items-cneter justify-between">
+            <Logo />
+            <UButton
+              :padded="false"
+              color="gray"
+              variant="link"
+              icon="i-heroicons-x-mark-20-solid"
+              @click="openMobileNav"
+            />
+          </div>
+        </template>
+        <UAccordion :items="items" :ui="{ wrapper: 'flex flex-col w-full ' }">
+          <template #default="{ item, index, open }">
+            <UButton
+              color="gray"
+              variant="ghost"
+              class="border border-gray-200 dark:border-gray-700"
+              :ui="{ rounded: 'rounded-none', padding: { sm: 'p-2' } }"
+            >
+              <span class="truncate p-2 capitalize text-lg">{{
+                item.label
+              }}</span>
+
+              <template #trailing>
+                <UIcon
+                  name="i-heroicons-chevron-right-20-solid"
+                  class="w-5 h-5 ms-auto transform transition-transform duration-200"
+                  :class="[open && 'rotate-90']"
+                />
+              </template>
+            </UButton>
+          </template>
+
+          <template #men>
+            <div v-for="(men, i) in menItems" :key="i" class="px-4 py-2">
+              <NuxtLink
+                @click="() => handleLink(men.path)"
+                class="cursor-pointer hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500"
+                >{{ men.label }}</NuxtLink
+              >
+            </div>
+          </template>
+          <template #women>
+            <div v-for="(women, i) in womenItems" :key="i" class="px-4 py-2">
+              <NuxtLink
+                @click="() => handleLink(women.path)"
+                class="cursor-pointer hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500"
+                >{{ women.label }}</NuxtLink
+              >
+            </div>
+          </template>
+        </UAccordion>
+        <div class="p-4 flex flex-col space-y-1">
+          <NuxtLink
+            to="/auth/login"
+            class="text-sm hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500"
+            >Login</NuxtLink
+          >
+          <NuxtLink
+            to="/profile/wishlist"
+            class="text-sm hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500"
+            >Wishlist</NuxtLink
+          >
+        </div>
+      </UCard>
+    </USlideover>
   </div>
 </template>
