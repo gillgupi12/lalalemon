@@ -36,7 +36,9 @@ const getProductInfos = async () => {
 
 <template>
   <div>
-    <UProgress animation="carousel" v-if="loading" size="sm" color="red" />
+    <div class="h-1">
+      <UProgress animation="carousel" v-if="loading" size="sm" color="red" />
+    </div>
     <div class="container w-7xl mx-auto min-h-screen">
       <div>
         <div class="sm:grid grid-cols-4 pt-10 gap-4">
