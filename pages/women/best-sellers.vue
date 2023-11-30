@@ -65,8 +65,8 @@ const fetchProductswithFilters = async (categoryIds: number) => {
             <div class="w-full flex place-content-end">
               <USkeleton v-if="loading" class="h-4 w-[250px]" />
               <div v-else>
-                <p v-if="!totalFilteredCount" class="font-bold text-sm">
-                  {{ totalCount }} products
+                <p v-if="allProducts.length > 0" class="font-bold text-sm">
+                  {{ allProducts.length }} products
                 </p>
               </div>
             </div>
@@ -83,7 +83,12 @@ const fetchProductswithFilters = async (categoryIds: number) => {
                   <ProductCardSkeleton v-if="loading" />
                   <ProductCard v-else-if="product" :item="product" />
                 </div>
-                <div v-if="allProducts.length === 0">No Products found.</div>
+              </div>
+              <div
+                v-if="!loading && allProducts.length === 0"
+                class="flex items-center justify-center w-full"
+              >
+                <div class="text-2xl font-bold">No Products found.</div>
               </div>
             </div>
           </div>

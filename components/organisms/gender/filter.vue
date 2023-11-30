@@ -53,9 +53,8 @@ const items = [
 
 <template>
   <div>
-    <div class="text-sm p-4">
-      <div>Filters</div>
-      <div>No filters applied</div>
+    <div class="text-sm pb-2">
+      <div class="font-bold">Filters</div>
     </div>
     <UAccordion :items="items" class="bg-white border">
       <template #category-filter>
