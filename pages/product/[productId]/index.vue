@@ -64,7 +64,7 @@ const addToBasketFn = () => {
     <div v-else>
       <div v-if="selectedProduct" class="sm:grid grid-cols-2 gap-10 w-full">
         <div class="sm:hidden">
-          <div class="flex flex-row gap-2">
+          <div class="flex flex-row gap-2 pb-2 md:pb-0">
             <ProductCrumb
               :gender="selectedProduct?.gender"
               :categoryId="selectedProduct?.category_id"
@@ -161,7 +161,7 @@ const addToBasketFn = () => {
               </div>
             </div>
             {{ errorMsg }}
-            <div class="bg-gray-50 p-4 w-1/2">
+            <div class="bg-gray-50 p-4 md:w-1/2">
               <UButton
                 @click="addToBasketFn"
                 color="red"

@@ -44,14 +44,14 @@ const getProductInfos = async () => {
       <div>
         <div class="sm:grid grid-cols-4 pt-10 gap-4">
           <div class="col-span-1">
-            <div>
+            <div class="p-2">
               <ProductFilter @nofilter="getProductInfos" />
             </div>
           </div>
           <div class="col-span-3 flex flex-col gap-2">
             <div class="w-full flex place-content-end">
               <USkeleton v-if="loading" class="h-4 w-[250px]" />
-              <div v-else>
+              <div v-else class="px-4 pt-2">
                 <p v-if="allProducts.length > 0" class="font-bold text-sm">
                   {{ allProducts.length }} products
                 </p>
@@ -60,7 +60,7 @@ const getProductInfos = async () => {
 
             <div class="w-full">
               <div
-                class="flex flex-col sm:grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 p-4 justify-stretch"
+                class="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 p-4 justify-stretch"
               >
                 <div
                   v-for="(product, index) of allProducts"
