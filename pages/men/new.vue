@@ -23,9 +23,9 @@ const getFromAndTo = () => {
 
 const getProductInfos = async () => {
   loading.value = true;
-  const { data, error, count } = await supabase.rpc(
-    "get_product_with_inventory"
-  );
+  const { data, error, count } = await supabase
+    .rpc("get_product_with_inventory")
+    .eq("gender", "MALE");
 
   if (data) {
     allProducts.value = data;
@@ -37,6 +37,7 @@ const fetchProductswithFilters = async (categoryIds: number) => {
   loading.value = true;
   const { data, error } = await supabase
     .rpc("get_product_with_inventory")
+    .eq("gender", "MALE")
     .in("category_id", [categoryIds]);
 
   if (data) {
@@ -82,6 +83,7 @@ const fetchProductswithFilters = async (categoryIds: number) => {
                   <ProductCardSkeleton v-if="loading" />
                   <ProductCard v-else-if="product" :item="product" />
                 </div>
+                <div v-if="allProducts.length === 0">No Products found.</div>
               </div>
             </div>
           </div>

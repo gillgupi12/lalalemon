@@ -67,6 +67,7 @@ const getProductInfos = async () => {
                   <ProductCardSkeleton v-if="loading" />
                   <ProductCard v-else-if="product" :item="product" />
                 </div>
+                <div v-if="allProducts.length === 0">No Products found.</div>
               </div>
             </div>
           </div>

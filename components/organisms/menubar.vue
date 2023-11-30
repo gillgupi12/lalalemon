@@ -102,10 +102,6 @@ const womenItems = [
     path: "women-jackets",
   },
   {
-    label: "Matching Sets",
-    path: "women-matching-sets",
-  },
-  {
     label: "Accessories",
     path: "women-accessories",
   },

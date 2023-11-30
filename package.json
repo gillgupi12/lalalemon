@@ -16,6 +16,7 @@
     "@nuxt/ui": "^2.11.0",
     "@nuxtjs/supabase": "^1.1.4",
     "@pinia/nuxt": "^0.5.1",
+    "nanoid": "^5.0.3",
     "pinia": "^2.1.7",
     "vue3-carousel-nuxt": "^1.1.0"
   },

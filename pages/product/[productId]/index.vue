@@ -6,6 +6,7 @@ const productId = route.params.productId.toString();
 const supabase = useSupabaseClient();
 const selectedProduct = ref();
 const { getColor } = useColorStore();
+const { addToBasket } = useBasketStore();
 
 const getProduct = async () => {
   const { data, error } = await supabase
@@ -32,6 +33,23 @@ const onColorChange = (data: any) => {
 
 const onSizeSelect = (data: any) => {
   selectedSize.value = data;
+};
+
+const errorMsg = ref();
+const addToBasketFn = () => {
+  if (selectedSize.value && selectedColorId.value && selectedProduct.value) {
+    addToBasket(
+      productId,
+      selectedSize.value,
+      selectedColorId.value,
+      selectedProduct.value.price,
+      1
+    );
+  } else {
+    if (!selectedSize.value) {
+      errorMsg.value = "Please select size";
+    }
+  }
 };
 </script>
 
@@ -103,6 +121,9 @@ const onSizeSelect = (data: any) => {
               </div>
             </div>
           </div>
+          <div v-if="selectedSize">SIZE: {{ selectedSize?.size }}</div>
+          <div v-else>Select Size</div>
+
           <div class="flex flex-row space-y-2">
             <div>
               <div v-for="info of selectedProduct.inventory">
@@ -116,9 +137,11 @@ const onSizeSelect = (data: any) => {
                       class="border"
                       :disabled="size.quantity === 0"
                       :class="
-                        size.quantity > 0
-                          ? 'bg-white text-black hover:bg-black hover:text-white'
-                          : 'bg-red-500 disabled text-white disabled:bg-red-500'
+                        selectedSize?.size === size.size
+                          ? 'bg-black text-white'
+                          : size.quantity > 0
+                            ? 'bg-white text-black hover:bg-black hover:text-white'
+                            : 'bg-red-500 disabled text-white disabled:bg-red-500'
                       "
                       @click="onSizeSelect(size)"
                     />
@@ -126,6 +149,15 @@ const onSizeSelect = (data: any) => {
                 </div>
               </div>
             </div>
+          </div>
+          {{ errorMsg }}
+          <div class="bg-gray-50 p-4 w-1/2">
+            <UButton
+              @click="addToBasketFn"
+              color="red"
+              class="rounded-none py-4 text-center flex item-center justify-center w-full"
+              >Add To Bag
+            </UButton>
           </div>
         </div>
       </div>
