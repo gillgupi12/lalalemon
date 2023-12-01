@@ -54,7 +54,7 @@ const items = [
 <template>
   <div>
     <div class="text-sm pb-2">
-      <div class="font-bold">Filters</div>
+      <div class="font-bold px-2">Filters</div>
     </div>
     <UAccordion :items="items" class="bg-white border">
       <template #category-filter>
