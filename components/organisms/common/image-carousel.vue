@@ -43,7 +43,6 @@ const productsToShow = computed(() => {
 });
 
 const goToSlide = (index: number) => {
-  console.log(index);
   activeSlideIndex.value = index - 1;
 };
 
@@ -54,7 +53,6 @@ const itemsPerSlide = computed(() => {
   return 1;
 });
 const updateViewportWidth = () => {
-  console.log("called");
   viewportWidth.value = window.innerWidth;
 };
 

@@ -3,19 +3,28 @@ const client = useSupabaseClient();
 const { userData } = storeToRefs(useAuthStore());
 const { getAllColors } = useColorStore();
 const { getAllCategories } = useCategoryStore();
+const { fetchBasket } = useBasketStore();
 
 const layout = ref<MaybeRef<string | false | undefined>>();
 
-onMounted(async () => {
-  const {
-    data: { user },
-  } = await client.auth.getUser();
-  if (user) {
-    await getAllColors();
-    await getAllCategories();
-    userData.value = user;
-  }
-});
+// onMounted(async () => {
+
+//   if (user && user.id) {
+//     await getAllColors();
+//     await getAllCategories();
+//     await fetchBasket();
+//     userData.value = user;
+//   }
+// });
+const {
+  data: { user },
+} = await client.auth.getUser();
+if (user && user.id) {
+  await getAllColors();
+  await getAllCategories();
+  await fetchBasket();
+  userData.value = user;
+}
 useHead({
   title: "Lalalemon",
 });

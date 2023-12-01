@@ -24,7 +24,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
       email: state.email,
       password: state.password,
     });
-    console.log(error, data);
+
     if (data.user) {
       successMessage.value = "Check your email to confirm your account.";
       toast.add({

@@ -15,8 +15,7 @@ onMounted(() => {
     props.item.inventory.length > 0 &&
     props.item.inventory[0].color_id
   )
-    console.log(props.item, props.item?.inventory[0]?.color_id);
-  selectedColor.value = props.item?.inventory[0]?.color_id;
+    selectedColor.value = props.item?.inventory[0]?.color_id;
 });
 
 watch(
@@ -26,12 +25,10 @@ watch(
   }
 );
 const onColorSelect = (colorId: string) => {
-  console.log(selectedColor.value);
   selectedColor.value = colorId;
 };
 
 const goToItem = (productId: string) => {
-  console.log(productId);
   router.push({
     name: "product-productId",
     params: { productId },

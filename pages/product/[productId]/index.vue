@@ -3,10 +3,12 @@ import ProductCrumb from "components/organisms/product/crumbs.vue";
 
 const route = useRoute();
 const productId = route.params.productId.toString();
+const toast = useToast();
 const supabase = useSupabaseClient();
 const selectedProduct = ref();
 const { getColor } = useColorStore();
-const { addToBasket } = useBasketStore();
+const { addToBasket, createBasket, updateBasket } = useBasketStore();
+const { basket } = storeToRefs(useBasketStore());
 
 const getProduct = async () => {
   const { data, error } = await supabase
@@ -39,9 +41,10 @@ const onSizeSelect = (data: any) => {
 };
 
 const errorMsg = ref();
-const addToBasketFn = () => {
-  if (selectedSize.value && selectedColorId.value && selectedProduct.value) {
-    addToBasket(
+const addToBasketFn = async () => {
+  if (!basket.value?.id) {
+    await createBasket();
+    await updateBasket(
       productId,
       selectedSize.value,
       selectedColorId.value,
@@ -49,10 +52,25 @@ const addToBasketFn = () => {
       1
     );
   } else {
-    if (!selectedSize.value) {
-      errorMsg.value = "Please select size";
+    if (selectedSize.value && selectedColorId.value && selectedProduct.value) {
+      await updateBasket(
+        productId,
+        selectedSize.value,
+        selectedColorId.value,
+        selectedProduct.value.price,
+        1
+      );
+    } else {
+      if (!selectedSize.value) {
+        errorMsg.value = "Please select size";
+      }
     }
   }
+  toast.add({
+    title: "Success",
+    color: "green",
+    description: "Item has been added to basket!",
+  });
 };
 </script>
 

@@ -28,7 +28,6 @@ const toolbarItems = [
 
 const supabase = useSupabaseClient();
 const logout = async () => {
-  console.log("ok");
   const response = await supabase.auth.signOut();
   if (response.error) return;
   userData.value = null;
@@ -111,6 +110,8 @@ const handleLink = (link: string) => {
   router.push({ name: link });
   openMobileNav();
 };
+
+const { basket } = storeToRefs(useBasketStore());
 </script>
 
 <template>
@@ -194,10 +195,18 @@ const handleLink = (link: string) => {
         </UPopover>
 
         <NuxtLink :to="{ name: 'basket' }">
-          <Icon
-            name="material-symbols:shopping-cart-outline"
-            class="hover:text-slate-500"
-          />
+          <div class="relative">
+            <div
+              v-if="basket?.items?.length"
+              class="absolute bg-red-500 text-white rounded-full border p-2 w-3 h-3 flex items-center justify-center text-xs -top-1 -right-2"
+            >
+              {{ basket?.items?.length }}
+            </div>
+            <Icon
+              name="material-symbols:shopping-cart-outline"
+              class="hover:text-slate-500"
+            />
+          </div>
         </NuxtLink>
       </div>
     </div>
