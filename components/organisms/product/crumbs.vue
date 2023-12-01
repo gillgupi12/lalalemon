@@ -2,7 +2,7 @@
 const { getCategory } = useCategoryStore();
 defineProps({
   gender: { type: String, required: true },
-  categoryId: { type: String, required: true },
+  categoryId: { type: Number, required: true },
 });
 
 const capitalizedText = (text: string) => {

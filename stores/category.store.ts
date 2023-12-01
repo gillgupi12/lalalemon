@@ -24,8 +24,8 @@ export const useCategoryStore = defineStore("categories", {
         },
     },
     getters: {
-        getCategory: (state) => (categoryId: string) => {
-            return state.allCategories?.find((category) => category.id === categoryId)
+        getCategory: (state) => (categoryId: number) => {
+            return state.allCategories?.find((category) => category.id === categoryId.toString())
         }
     },
 });

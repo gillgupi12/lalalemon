@@ -65,7 +65,11 @@ const addToBasketFn = () => {
         <div class="sm:hidden">
           <div class="flex flex-row gap-2 pb-2 md:pb-0">
             <ProductCrumb
-              v-if="!loading"
+              v-if="
+                !loading &&
+                selectedProduct?.category_id &&
+                selectedProduct?.gender
+              "
               :gender="selectedProduct?.gender"
               :categoryId="selectedProduct?.category_id"
             />
