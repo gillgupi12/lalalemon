@@ -1,8 +1,8 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="!bg-gray-200 w-full border-t">
-    <UContainer class="p-10 flex items-center flex-col space-y-6">
+  <div class="border-t bg-gray-200 dark:bg-[#121212]">
+    <UContainer class="p-10 flex items-center flex-col space-y-6 w-full">
       <div class="text-center flex flex-col gap-2">
         <p class="text-xl sm:text-4xl font-bold">
           Our freshest gear. Straight to your inbox.
@@ -32,7 +32,9 @@
             class="px-10 rounded flex items-center justify-center"
           ></UButton>
         </div>
-        <div class="flex flex-col text-center text-gray-500 pt-2">
+        <div
+          class="flex flex-col text-center text-gray-500 pt-2 dark:text-white"
+        >
           <small>
             We respect your privacy and won't spam you. Unsubscribe at anytime.
           </small>

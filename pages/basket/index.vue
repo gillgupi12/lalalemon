@@ -88,6 +88,14 @@ const fetchProducts = async () => {
   }
   loading.value = false;
 };
+const totalAmount = computed(() => {
+  return basketData.value
+    .map((row: any) => {
+      const data = row.item_data?.price * row?.item_data?.quantity;
+      return data;
+    })
+    .reduce((a: any, b: any) => a + b, 0);
+});
 onMounted(async () => {
   await loadBasketData();
   await fetchProducts();
@@ -136,7 +144,7 @@ const breakpoints = {
           <div class="flex flex-col gap-2">
             <div class="flex flex-row justify-between">
               <p>Subtotal</p>
-              <div>HK$1,180.00</div>
+              <div>HK${{ totalAmount }}</div>
             </div>
             <UDivider />
             <div class="flex flex-row justify-between">
@@ -146,7 +154,7 @@ const breakpoints = {
             <UDivider />
             <div class="flex flex-row justify-between font-bold">
               <div>Estimated Total</div>
-              <div>HK$1,180.00</div>
+              <div>HK${{ totalAmount }}</div>
             </div>
             <UButton
               color="red"

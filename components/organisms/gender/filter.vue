@@ -56,7 +56,7 @@ const items = [
     <div class="text-sm pb-2">
       <div class="font-bold px-2">Filters</div>
     </div>
-    <UAccordion :items="items" class="bg-white border">
+    <UAccordion :items="items" class="bg-white border dark:bg-[#121212]">
       <template #category-filter>
         <div class="flex flex-col space-y-1 px-4">
           <div v-for="(categories, index) in allCategories" :key="index">

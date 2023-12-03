@@ -116,7 +116,7 @@ const { basket } = storeToRefs(useBasketStore());
 
 <template>
   <div
-    class="flex flex-row items-center gap-2 text-black py-3 w-full shadow-sm bg-white border-t border-b dark:bg-gray-50 dark:text-black px-4"
+    class="flex flex-row items-center gap-2 text-black py-3 w-full shadow-sm bg-white border-t border-b dark:!bg-[#121212] dark:text-white px-4"
   >
     <div
       class="flex max-w-8xl container justify-between flex-row mx-auto w-full"
@@ -153,7 +153,7 @@ const { basket } = storeToRefs(useBasketStore());
           </NuxtLink>
           <template #panel>
             <div class="p-4">
-              <div class="flex flex-col space-y-1">
+              <div class="flex flex-col space-y-1 dark:text-white">
                 <NuxtLink
                   v-if="!userData?.id"
                   :to="{ name: 'auth-login' }"

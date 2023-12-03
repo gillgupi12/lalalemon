@@ -79,14 +79,14 @@ const deletedItem = async (itemId: string) => {
         <p class="text-base">Size: {{ item.size_id.size }}</p>
         <div class="flex flex-row gap-2 items-center">
           Quantity:
-          <USelect
-            :options="[1, 2, 3, 4]"
-            :model-value="item!.quantity!"
-          ></USelect>
+          <USelect :options="[1, 2, 3, 4]" v-model="item.quantity"></USelect>
         </div>
 
         <div>
-          Total: <span class="font-bold">HK${{ total }}</span>
+          Total:
+          <span class="font-bold"
+            >HK${{ item!.quantity * item.product.product_price }}</span
+          >
         </div>
       </div>
     </div>

@@ -38,4 +38,7 @@ export default defineNuxtConfig({
     layouts: fileURLToPath(new URL('./layouts', import.meta.url)),
     store: fileURLToPath(new URL('./store', import.meta.url)),
   },
+  colorMode: {
+    preference: 'light'
+  }
 })
