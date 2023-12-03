@@ -7,10 +7,11 @@ const state = reactive({
   password: "",
 });
 const errorMessage = ref();
-const successMessage = ref();
 const toast = useToast();
 const { userData } = storeToRefs(useAuthStore());
 const { getAllColors } = useColorStore();
+const { getAllCategories } = useCategoryStore();
+const { fetchBasket } = useBasketStore();
 const loading = ref(false);
 
 const validate = (state: any): FormError[] => {
@@ -38,6 +39,8 @@ async function onSubmit(event: FormSubmitEvent<any>) {
       });
 
       await getAllColors();
+      await getAllCategories();
+      await fetchBasket();
       router.push("/");
     }
     if (error) throw error;

@@ -5,17 +5,6 @@ const { getAllColors } = useColorStore();
 const { getAllCategories } = useCategoryStore();
 const { fetchBasket } = useBasketStore();
 
-const layout = ref<MaybeRef<string | false | undefined>>();
-
-// onMounted(async () => {
-
-//   if (user && user.id) {
-//     await getAllColors();
-//     await getAllCategories();
-//     await fetchBasket();
-//     userData.value = user;
-//   }
-// });
 const {
   data: { user },
 } = await client.auth.getUser();
