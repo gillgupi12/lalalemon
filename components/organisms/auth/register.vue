@@ -70,10 +70,6 @@ const openRegisterForm = () => {
               <icon name="ph:shopping-cart" size="20"></icon>
               <p>View Order History</p>
             </li>
-            <li class="flex flex-row items-center gap-1">
-              <icon name="ph:heart" size="20"></icon>
-              <p>Saved wishlist</p>
-            </li>
           </ul>
         </div>
         <UButton

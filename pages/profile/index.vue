@@ -82,16 +82,6 @@ useHead({
           />
         </div>
       </Card>
-      <Card>
-        <div class="flex flex-col gap-4">
-          <div class="flex flex-row items-center justify-between">
-            <div />
-            <div class="text-center">Your Wishlist</div>
-            <div />
-          </div>
-          <div class="text-center text-xs">This list is empty.</div>
-        </div>
-      </Card>
     </div>
   </UContainer>
 </template>

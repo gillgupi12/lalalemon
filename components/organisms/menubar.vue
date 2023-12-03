@@ -12,21 +12,10 @@ const toolbarItems = [
     label: "Men",
     path: "/men",
   },
-  // {
-  //   label: "Accessories",
-  //   path: "/accessories",
-  // },
-  // {
-  //   label: "Community",
-  //   path: "/community",
-  // },
-  // {
-  //   label: "Find your Wellbeing",
-  //   path: "/wellbeing",
-  // },
 ];
 
 const supabase = useSupabaseClient();
+
 const logout = async () => {
   const response = await supabase.auth.signOut();
   if (response.error) return;
@@ -168,13 +157,6 @@ const { basket } = storeToRefs(useBasketStore());
                 >
                   Profile
                 </NuxtLink>
-                <NuxtLink
-                  v-if="userData?.id"
-                  :to="{ name: 'profile-wishlist' }"
-                  class="hover:underline transition-all"
-                >
-                  Wishlist
-                </NuxtLink>
                 <p
                   v-if="userData?.id"
                   @click="logout()"
@@ -212,9 +194,9 @@ const { basket } = storeToRefs(useBasketStore());
     </div>
     <USlideover v-model="toggleMobile" side="left">
       <UCard
-        class="flex flex-col flex-1"
+        class="flex flex-col flex-1 !bg-[#121212]"
         :ui="{
-          body: { base: 'flex-1 !p-0' },
+          body: { base: 'flex-1 !p-0 !bg-[#121212]' },
           ring: '',
           divide: 'divide-y divide-gray-100 dark:divide-gray-800',
         }"
@@ -274,14 +256,10 @@ const { basket } = storeToRefs(useBasketStore());
         </UAccordion>
         <div class="p-4 flex flex-col space-y-1">
           <NuxtLink
+            v-if="userData?.id"
             to="/auth/login"
-            class="text-sm hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500"
+            class="text-sm hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500 dark:hover:text-white"
             >Login</NuxtLink
-          >
-          <NuxtLink
-            to="/profile/wishlist"
-            class="text-sm hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500"
-            >Wishlist</NuxtLink
           >
         </div>
       </UCard>
