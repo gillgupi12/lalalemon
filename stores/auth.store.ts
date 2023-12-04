@@ -72,4 +72,29 @@ export const useAuthStore = defineStore('auth', {
     state: (): State => ({
         userData: null
     }),
+    actions: {
+        async updateUserData(userData: { email: string, firstName: string, lastName: string }) {
+            const supabase = useSupabaseClient()
+            const response = await supabase.auth.updateUser({
+                email: userData.email,
+                data: { firstName: userData.firstName, lastName: userData.lastName },
+            });
+            if (response.error) {
+                return response
+            } else if (response.data.user) {
+                this.userData = response.data.user
+                return response
+            }
+        },
+        async updateUserPassword(password: string) {
+            const supabase = useSupabaseClient()
+            const response = await supabase.auth.updateUser({ password })
+            if (response.error) {
+                return response
+            } else if (response.data.user) {
+                // this.userData = response.data.user
+                return response
+            }
+        }
+    }
 }) 

@@ -4,6 +4,8 @@ const router = useRouter();
 useHead({
   title: "Profile | Lalalemon",
 });
+
+const { userData } = storeToRefs(useAuthStore());
 </script>
 
 <template>
@@ -13,17 +15,28 @@ useHead({
         <div class="flex flex-row items-center justify-between">
           <div />
           <div class="text-center">Your Profile</div>
-          <NuxtLink class="underline font-bold text-sm">Edit</NuxtLink>
+          <NuxtLink
+            class="underline font-bold text-sm cursor-pointer"
+            @click="() => router.push('/profile/edit-profile')"
+            >Edit</NuxtLink
+          >
         </div>
-        <div>Name</div>
-        <div>Email</div>
-        <div>Phone</div>
+        <div>
+          Name: {{ userData.user_metadata?.firstName }}
+          {{ userData.user_metadata?.lastName }}
+        </div>
+        <div>Email: {{ userData.email }}</div>
+        <div>Phone: {{ userData.phone }}</div>
       </Card>
       <Card>
         <div class="flex flex-row items-center justify-between">
           <div />
           <div class="text-center">Your Password</div>
-          <NuxtLink class="underline font-bold text-sm">Edit</NuxtLink>
+          <NuxtLink
+            class="underline font-bold text-sm"
+            @click="() => router.push('/profile/edit-password')"
+            >Edit</NuxtLink
+          >
         </div>
         <div>Password</div>
         <div>********</div>
