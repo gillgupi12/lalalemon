@@ -19,7 +19,7 @@ useHead({
 });
 </script>
 <template>
-  <div class="min-h-screen overflow-hidden">
+  <div class="min-h-screen">
     <div>
       <NuxtLayout>
         <UNotifications />

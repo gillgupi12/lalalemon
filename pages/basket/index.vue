@@ -57,7 +57,7 @@ const array = ref<any>([
 
 const basketData = ref();
 const router = useRouter();
-const loading = ref(false);
+const loading = ref(true);
 const supabase = useSupabaseClient();
 const getData = async () => {
   const response = await supabase
@@ -160,6 +160,7 @@ const breakpoints = {
               color="red"
               class="py-4 rounded-none text-center flex items-center justify-center"
               label="CHECKOUT"
+              @click="() => router.push('/checkout')"
             />
           </div>
         </div>

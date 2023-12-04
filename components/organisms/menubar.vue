@@ -101,6 +101,7 @@ const handleLink = (link: string) => {
 };
 
 const { basket } = storeToRefs(useBasketStore());
+const route = useRoute();
 </script>
 
 <template>
@@ -114,13 +115,20 @@ const { basket } = storeToRefs(useBasketStore());
         class="md:hidden cursor-pointer hover:text-red-500"
         @click="openMobileNav"
       >
-        <Icon name="prime:bars" size="28" />
+        <Icon
+          v-if="route.fullPath !== '/checkout'"
+          name="prime:bars"
+          size="28"
+        />
       </div>
       <NuxtLink to="/">
         <Logo />
       </NuxtLink>
 
-      <div class="hidden md:flex flex-row space-x-8 text-lg px-4">
+      <div
+        v-if="route.fullPath !== '/checkout'"
+        class="hidden md:flex flex-row space-x-8 text-lg px-4"
+      >
         <div v-for="(toolbarItem, index) in toolbarItems" :key="index">
           <NuxtLink
             :to="toolbarItem.path"
@@ -133,7 +141,11 @@ const { basket } = storeToRefs(useBasketStore());
       </div>
 
       <div class="flex flex-row items-center gap-4">
-        <UPopover mode="hover" :popper="{ offsetDistance: 0 }">
+        <UPopover
+          v-if="route.fullPath !== '/checkout'"
+          mode="hover"
+          :popper="{ offsetDistance: 0 }"
+        >
           <NuxtLink :to="{ name: 'profile' }">
             <Icon
               name="teenyicons:user-circle-outline"
@@ -192,7 +204,11 @@ const { basket } = storeToRefs(useBasketStore());
         </NuxtLink>
       </div>
     </div>
-    <USlideover v-model="toggleMobile" side="left">
+    <USlideover
+      v-if="route.fullPath !== '/checkout'"
+      v-model="toggleMobile"
+      side="left"
+    >
       <UCard
         class="flex flex-col flex-1 dark:!bg-[#121212]"
         :ui="{
