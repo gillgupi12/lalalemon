@@ -27,7 +27,7 @@ const onSubmit = async (event: FormSubmitEvent<any>) => {
 <template>
   <Card class="flex flex-col gap-8">
     <div>
-      <div class="font-bold text-2xl">Edit Your Profile</div>
+      <div class="font-bold text-2xl">Update Your Password</div>
       <small>* indicates the field is required</small>
     </div>
     <UForm

@@ -1,5 +1,6 @@
 <script setup>
 import Card from "components/organisms/common/card.vue";
+import AddressCard from "components/organisms/profile/address-card.vue";
 const router = useRouter();
 useHead({
   title: "Profile | Lalalemon",
@@ -21,19 +22,19 @@ const { userData } = storeToRefs(useAuthStore());
             >Edit</NuxtLink
           >
         </div>
-        <div class="flex flex-row gap-1">
-          Name:
+        <div class="font-light text-sm">
+          Name
           <p class="font-semibold">
             {{ userData.user_metadata?.firstName }}
             {{ userData.user_metadata?.lastName }}
           </p>
         </div>
-        <div class="flex flex-row gap-1">
-          Email:
+        <div class="font-light text-sm">
+          Email
           <p class="font-semibold">{{ userData.email }}</p>
         </div>
-        <div class="flex flex-row gap-1">
-          Phone:
+        <div class="font-light text-sm">
+          Phone
           <p class="font-semibold" v-if="userData.phone">
             +{{ userData.phone }}
           </p>
@@ -53,21 +54,7 @@ const { userData } = storeToRefs(useAuthStore());
         <div>********</div>
       </Card>
 
-      <Card>
-        <div class="flex flex-col gap-4">
-          <div class="flex flex-row items-center justify-between">
-            <div />
-            <div class="text-center">Your Saved Addresses</div>
-            <div />
-          </div>
-          <UButton
-            class="py-4 rounded-none w-full flex itmes-center justify-center border-black border hover:bg-black hover:text-white outline-none"
-            color="white"
-            label="ADD NEW ADDRESS"
-            @click="router.push({ name: 'profile-add-address' })"
-          />
-        </div>
-      </Card>
+      <AddressCard />
       <div />
       <Card>
         <div class="flex flex-col gap-4">

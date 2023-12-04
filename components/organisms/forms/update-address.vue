@@ -5,6 +5,7 @@ import countries from "data/countries.json";
 
 const props = defineProps({
   errorMessage: { type: String, required: false, default: "" },
+  address: { type: Object as PropType<Address>, required: true },
 });
 interface FromState {
   address_title: string;
@@ -19,18 +20,19 @@ interface FromState {
   district: string;
 }
 
-const emits = defineEmits(["addAddress"]);
+const emits = defineEmits(["updateAddress"]);
 const state = reactive({
-  address_title: undefined,
-  country: undefined,
-  first_name: undefined,
-  last_name: undefined,
-  country_code: undefined,
-  phone: undefined,
-  address_line_1: undefined,
-  address_line_2: undefined,
-  region: undefined,
-  district: undefined,
+  id: props.address?.id ?? undefined,
+  address_title: props.address?.address_title ?? undefined,
+  country: props.address?.country ?? undefined,
+  first_name: props.address?.first_name ?? undefined,
+  last_name: props.address?.last_name ?? undefined,
+  country_code: props.address?.country_code ?? undefined,
+  phone: props.address?.phone ?? undefined,
+  address_line_1: props.address?.address_line_1 ?? undefined,
+  address_line_2: props.address?.address_line_2 ?? undefined,
+  region: props.address?.region ?? undefined,
+  district: props.address?.district ?? undefined,
 });
 
 const validate = (state: FromState): FormError[] => {
@@ -53,14 +55,14 @@ const validate = (state: FromState): FormError[] => {
 };
 
 async function onSubmit(event: FormSubmitEvent<any>) {
-  emits("addAddress", state);
+  emits("updateAddress", state);
 }
 </script>
 
 <template>
   <Card class="flex flex-col gap-8">
     <div>
-      <div class="font-bold text-2xl">ADD NEW ADDRESS</div>
+      <div class="font-bold text-2xl">UPDATE ADDRESS</div>
       <small>* indicates the field is required</small>
     </div>
     <UForm
