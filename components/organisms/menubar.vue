@@ -194,9 +194,9 @@ const { basket } = storeToRefs(useBasketStore());
     </div>
     <USlideover v-model="toggleMobile" side="left">
       <UCard
-        class="flex flex-col flex-1 !bg-[#121212]"
+        class="flex flex-col flex-1 dark:!bg-[#121212]"
         :ui="{
-          body: { base: 'flex-1 !p-0 !bg-[#121212]' },
+          body: { base: 'flex-1 !p-0 dark:!bg-[#121212]' },
           ring: '',
           divide: 'divide-y divide-gray-100 dark:divide-gray-800',
         }"
