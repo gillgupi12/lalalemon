@@ -5,6 +5,8 @@ import type { FormError, FormSubmitEvent } from "#ui/types";
 const router = useRouter();
 const props = defineProps({
   user: { type: Object as PropType<User>, required: true },
+  loading: { type: Boolean, required: true, default: false },
+  errorMessage: { type: String, required: false, default: "" },
 });
 
 const emits = defineEmits(["updateProfile"]);
@@ -12,7 +14,6 @@ const state = reactive({
   email: props.user.email,
   firstName: props.user.user_metadata?.firstName ?? undefined,
   lastName: props.user.user_metadata?.lastName ?? undefined,
-  //   phone: props.user.phone,
 });
 
 const validate = (state: any): FormError[] => {
@@ -49,19 +50,19 @@ const onSubmit = async (event: FormSubmitEvent<any>) => {
       <UFormGroup label="Last Name" name="lastName">
         <UInput v-model="state.lastName" size="xl" />
       </UFormGroup>
-      <!-- <UFormGroup label="Phone" name="phone" class="w-full">
-        <UInput v-model="state.phone" size="xl" />
-        <small class="text-gray-400">22345678</small>
-      </UFormGroup> -->
+      <small class="text-red-500">{{ errorMessage }}</small>
 
       <UButton
         type="submit"
+        :loading="loading"
+        :disabled="loading"
         color="black"
         class="w-full flex items-center justify-center py-4 hover:bg-white hover:text-black border-black border rounded-none"
       >
         SAVE
       </UButton>
       <UButton
+        :disabled="loading"
         color="white"
         class="w-full flex items-center justify-center py-4 hover:bg-black hover:text-white border-black border rounded-none"
         @click="() => router.push('/profile')"

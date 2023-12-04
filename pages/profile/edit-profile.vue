@@ -1,17 +1,12 @@
 <script setup lang="ts">
 import EditProfileForm from "components/organisms/forms/edit-profile.vue";
-import { routerKey } from "vue-router";
 
 const { userData } = storeToRefs(useAuthStore());
 const { updateUserData } = useAuthStore();
-const supabase = useSupabaseClient();
 const router = useRouter();
 const toast = useToast();
-
-const phone = ref("");
-const token = ref();
-
-const verifyPhoneNumber = ref(false);
+const loading = ref(false);
+const errorMessage = ref();
 
 const updateUser = async (userData: {
   email: string;
@@ -19,9 +14,9 @@ const updateUser = async (userData: {
   firstName: string;
   lastName: string;
 }) => {
-  phone.value = userData.phone;
+  loading.value = true;
+  errorMessage.value = "";
   const response = await updateUserData({
-    // phone: userData.phone,
     email: userData.email,
     lastName: userData.lastName,
     firstName: userData.firstName,
@@ -33,6 +28,7 @@ const updateUser = async (userData: {
       description: "An error occured when updating!",
       timeout: 3000,
     });
+    errorMessage.value = response.error.message;
   } else if (response?.data) {
     toast.add({
       title: "Success",
@@ -42,20 +38,8 @@ const updateUser = async (userData: {
     });
     router.push("/profile");
   }
+  loading.value = false;
 };
-
-// const optinput = ref();
-// const verifyPhone = async () => {
-//   const response = await supabase.auth.verifyOtp({
-//     phone: phone.value,
-//     type: "phone_change",
-//     token: token.value,
-//   });
-//   if (response.data.user?.phone) {
-//     router.push("/profile");
-//   }
-//   console.log(response);
-// };
 </script>
 
 <template>
@@ -64,16 +48,9 @@ const updateUser = async (userData: {
       v-if="userData"
       class="bg-white"
       :user="userData"
+      :loading="loading"
+      :error-message="errorMessage"
       @update-profile="updateUser"
     />
-    <!-- <UModal v-model="verifyPhoneNumber">
-      <div class="p-4">
-        <label for="phone">Phone</label>
-        <UInput v-model="phone" />
-        <label for="phone">OTP CODE</label>
-        <UInput v-model="token" />
-        <UButton @click="verifyPhone" label="Verify" />
-      </div>
-    </UModal> -->
   </UContainer>
 </template>

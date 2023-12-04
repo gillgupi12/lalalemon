@@ -21,19 +21,30 @@ const { userData } = storeToRefs(useAuthStore());
             >Edit</NuxtLink
           >
         </div>
-        <div>
-          Name: {{ userData.user_metadata?.firstName }}
-          {{ userData.user_metadata?.lastName }}
+        <div class="flex flex-row gap-1">
+          Name:
+          <p class="font-semibold">
+            {{ userData.user_metadata?.firstName }}
+            {{ userData.user_metadata?.lastName }}
+          </p>
         </div>
-        <div>Email: {{ userData.email }}</div>
-        <div>Phone: {{ userData.phone }}</div>
+        <div class="flex flex-row gap-1">
+          Email:
+          <p class="font-semibold">{{ userData.email }}</p>
+        </div>
+        <div class="flex flex-row gap-1">
+          Phone:
+          <p class="font-semibold" v-if="userData.phone">
+            +{{ userData.phone }}
+          </p>
+        </div>
       </Card>
       <Card>
         <div class="flex flex-row items-center justify-between">
           <div />
           <div class="text-center">Your Password</div>
           <NuxtLink
-            class="underline font-bold text-sm"
+            class="underline font-bold text-sm cursor-pointer"
             @click="() => router.push('/profile/edit-password')"
             >Edit</NuxtLink
           >
