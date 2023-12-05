@@ -56,7 +56,7 @@ const openRegisterForm = () => {
       <div class="text-2xl flex flex-col space-y-6">
         <p class="font-bold">Don't have a lalalemon account?</p>
         <p class="font-normal">Sign up to get these perks and more:</p>
-        <div class="">
+        <div>
           <ul class="text-sm flex flex-col space-y-2">
             <li class="flex flex-row items-center gap-1">
               <icon name="ph:clock-countdown-light" size="20"></icon>

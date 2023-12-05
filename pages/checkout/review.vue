@@ -2,43 +2,6 @@
 definePageMeta({
   layout: false,
 });
-const router = useRouter();
-const supabase = useSupabaseClient();
-const { getUserAddresses } = useAuthStore();
-const { getColor } = useColorStore();
-const { userData } = storeToRefs(useAuthStore());
-const { userAddresses } = storeToRefs(useAuthStore());
-
-const email = ref(userData.value?.email);
-const basketData = ref();
-
-const handleGetUserAddress = async () => {
-  await getUserAddresses();
-};
-
-const getData = async () => {
-  const response = await supabase
-    .rpc("get_basket_with_product_details")
-    .select();
-
-  if (response.data) {
-    basketData.value = response.data;
-  }
-};
-
-const totalAmount = computed(() => {
-  return basketData.value
-    ?.map((row: any) => {
-      const data = row.item_data?.price * row?.item_data?.quantity;
-      return data;
-    })
-    .reduce((a: any, b: any) => a + b, 0);
-});
-
-onMounted(async () => {
-  await handleGetUserAddress();
-  await getData();
-});
 </script>
 
 <template>

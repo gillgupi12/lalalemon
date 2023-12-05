@@ -4,48 +4,19 @@ definePageMeta({
   layout: false,
 });
 const router = useRouter();
-const supabase = useSupabaseClient();
 const { getUserAddresses } = useAuthStore();
-const { getColor } = useColorStore();
-const { userData } = storeToRefs(useAuthStore());
 const { userAddresses } = storeToRefs(useAuthStore());
-
-const email = ref(userData.value?.email);
-const basketData = ref();
+const { checkoutDetails } = storeToRefs(useCheckOutStore());
 
 const handleGetUserAddress = async () => {
   await getUserAddresses();
 };
 
-const getData = async () => {
-  const response = await supabase
-    .rpc("get_basket_with_product_details")
-    .select();
-
-  if (response.data) {
-    basketData.value = response.data;
-  }
-};
-
-const totalAmount = computed(() => {
-  return basketData.value
-    ?.map((row: any) => {
-      const data = row.item_data?.price * row?.item_data?.quantity;
-      return data;
-    })
-    .reduce((a: any, b: any) => a + b, 0);
-});
-
 onMounted(async () => {
   await handleGetUserAddress();
-  await getData();
-});
-
-const paymentDetails = reactive({
-  card_number: "",
-  exp_date: "",
-  ccv: "",
-  cardholder: "",
+  if (userAddresses.value) {
+    checkoutDetails.value.billing_details = userAddresses.value.slice(0, 1)[0];
+  }
 });
 
 const validate = (state: any): FormError[] => {
@@ -71,12 +42,12 @@ const validate = (state: any): FormError[] => {
         <div class="flex flex-col gap-2">
           <UForm
             :validate="validate"
-            :state="paymentDetails"
+            :state="checkoutDetails.payment_details"
             class="space-y-4 flex flex-col"
           >
             <UFormGroup label="Card number:" name="card_number">
               <UInput
-                v-model="paymentDetails.card_number"
+                v-model="checkoutDetails.payment_details.card_number"
                 type="text"
                 size="xl"
               />
@@ -85,7 +56,7 @@ const validate = (state: any): FormError[] => {
               <div class="w-full">
                 <UFormGroup label="Exp Date:" name="exp_date">
                   <UInput
-                    v-model="paymentDetails.exp_date"
+                    v-model="checkoutDetails.payment_details.exp_date"
                     type="text"
                     size="xl"
                   />
@@ -93,13 +64,17 @@ const validate = (state: any): FormError[] => {
               </div>
               <div class="w-full">
                 <UFormGroup label="CCV:" name="ccv">
-                  <UInput v-model="paymentDetails.ccv" type="text" size="xl" />
+                  <UInput
+                    v-model="checkoutDetails.payment_details.ccv"
+                    type="text"
+                    size="xl"
+                  />
                 </UFormGroup>
               </div>
             </div>
             <UFormGroup label="Cardholder:" name="cardholder">
               <UInput
-                v-model="paymentDetails.cardholder"
+                v-model="checkoutDetails.payment_details.cardholder"
                 type="text"
                 size="xl"
               />
@@ -133,7 +108,7 @@ const validate = (state: any): FormError[] => {
           color="red"
           label="REVIEW ORDER"
           size="xl"
-          :disabled="validate(paymentDetails).length > 0"
+          :disabled="validate(checkoutDetails.payment_details).length > 0"
           class="flex items-center justify-center"
           @click="() => router.push('/checkout/payment')"
         />

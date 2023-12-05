@@ -118,6 +118,30 @@ export const useBasketStore = defineStore("basket", {
         }
       }
     },
+    async updateBasketItem() {
+      const supabase = useSupabaseClient();
+      const { userData } = storeToRefs(useAuthStore());
+      if (userData.value && userData.value.id) {
+        const basketItems = this.basket.items
+        const { data, error } = await supabase
+          .from("user_basket")
+          .update([
+            {
+              id: this.basket?.id,
+              user_id: userData.value.id,
+              items: basketItems,
+              total_quantity: this.basket.items.reduce((total, item) => total + item.quantity, 0),
+              total_price: this.basket.items.reduce((total, item) => total + item.quantity * item.price, 0),
+            },
+          ] as never)
+          .eq("user_id", userData.value.id)
+          .select();
+
+        if (data && data[0]) {
+          this.basket = data[0];
+        }
+      }
+    },
     async deleteBasketItem(
       basketItemId: string
     ) {

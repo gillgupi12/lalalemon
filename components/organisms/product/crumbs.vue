@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const { getCategory } = useCategoryStore();
-defineProps({
+const props = defineProps({
   gender: { type: String, required: true },
   categoryId: { type: Number, required: true },
 });
+
+const { getCategory } = useCategoryStore();
 
 const capitalizedText = (text: string) => {
   // Capitalize the first letter and make the rest lowercase
@@ -22,7 +23,7 @@ const capitalizedText = (text: string) => {
     <div
       class="underline underline-offset-2 decoration-slate-500 decoration-2 cursor-pointer capitalize hover:font-normal hover:decoration-red-500"
     >
-      {{ getCategory(categoryId)?.name }}
+      {{ getCategory(categoryId) }}
     </div>
   </div>
 </template>

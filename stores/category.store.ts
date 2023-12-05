@@ -1,14 +1,12 @@
 interface Category {
-    id: string;
+    id: number;
     name: string;
     description: string;
-
 }
 
 interface State {
     allCategories: Category[] | null;
 }
-
 
 export const useCategoryStore = defineStore("categories", {
     state: (): State => ({
@@ -19,13 +17,14 @@ export const useCategoryStore = defineStore("categories", {
             const supabase = useSupabaseClient();
             const { data, error } = await supabase.from("categories").select("*");
             if (data) {
-                this.allCategories = data
+                this.allCategories = data;
             }
         },
     },
     getters: {
         getCategory: (state) => (categoryId: number) => {
-            return state.allCategories?.find((category) => category.id === categoryId.toString())
-        }
+            return state.allCategories?.find((category) => category.id === categoryId)
+                ?.name;
+        },
     },
 });

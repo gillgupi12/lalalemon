@@ -88,15 +88,16 @@ const addToBasketFn = async () => {
                 selectedProduct?.category_id &&
                 selectedProduct?.gender
               "
-              :gender="selectedProduct?.gender"
-              :categoryId="selectedProduct?.category_id"
+              :gender="selectedProduct.gender"
+              :categoryId="selectedProduct.category_id"
             />
+
             <div v-else class="flex items-center space-x-4">
               <USkeleton class="h-4 w-[250px]" />
             </div>
           </div>
         </div>
-        <div class="">
+        <div>
           <USkeleton v-if="loading" class="h-[500px] w-screen md:w-[500px]" />
           <div v-else>
             <div

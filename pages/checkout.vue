@@ -6,10 +6,7 @@ definePageMeta({
 const supabase = useSupabaseClient();
 const { getUserAddresses } = useAuthStore();
 const { getColor } = useColorStore();
-const { userData } = storeToRefs(useAuthStore());
-const { userAddresses } = storeToRefs(useAuthStore());
-
-const email = ref(userData.value?.email);
+const { checkoutDetails } = storeToRefs(useCheckOutStore());
 const basketData = ref();
 
 const handleGetUserAddress = async () => {
@@ -38,6 +35,10 @@ const totalAmount = computed(() => {
 onMounted(async () => {
   await handleGetUserAddress();
   await getData();
+  if (basketData.value) {
+    checkoutDetails.value.order_quantity = basketData.value?.length;
+    checkoutDetails.value.order_total = totalAmount.value;
+  }
 });
 </script>
 

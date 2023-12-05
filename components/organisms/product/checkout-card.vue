@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { EmitFlags } from "typescript";
-
 const props = defineProps({
   item: {
     type: Object || String || null,
@@ -16,17 +14,9 @@ const props = defineProps({
   },
 });
 
-const redirectToItem = (item: any) => {
-  // console.log(item);
-};
-
-const quantity = ref(1);
-const total = computed(() => {
-  return quantity.value * props.item.price;
-});
-
 const { getColor } = useColorStore();
-const { deleteBasketItem } = useBasketStore();
+const { deleteBasketItem, updateBasketItem } = useBasketStore();
+const { basket } = storeToRefs(useBasketStore());
 const emits = defineEmits(["refetchBasket"]);
 
 const isOpen = ref(false);
@@ -42,11 +32,30 @@ const deletedItem = async (itemId: string) => {
     emits("refetchBasket");
   }
 };
+
+watch(
+  props,
+  async (newData, oldData) => {
+    const index = basket.value.items.findIndex(
+      (item) => item.id === props.item.id
+    );
+
+    if (index !== -1) {
+      basket.value.items[index].id = props.item.id;
+      basket.value.items[index].color_id = props.item.color_id;
+      basket.value.items[index].size_id = props.item.size_id;
+      basket.value.items[index].quantity = props.item.quantity;
+      basket.value.items[index].price = props.item.price;
+    }
+    await updateBasketItem();
+  },
+  { deep: true }
+);
 </script>
 
 <template>
   <div class="overflow-hidden bg-white p-2 shadow-sm border mb-2">
-    <div class="flex flex-row gap-4" @click="redirectToItem(item.product.id)">
+    <div class="flex flex-row gap-4">
       <div class="relative overflow-hidden w-60">
         <carousel :wrapAround="true" snapAlign="start">
           <slide v-for="image in item.product.product_images" :key="image">

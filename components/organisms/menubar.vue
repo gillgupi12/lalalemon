@@ -191,10 +191,10 @@ const route = useRoute();
         <NuxtLink :to="{ name: 'basket' }">
           <div class="relative">
             <div
-              v-if="basket?.items?.length"
+              v-if="basket?.total_quantity"
               class="absolute bg-red-500 text-white rounded-full border p-2 w-3 h-3 flex items-center justify-center text-xs -top-1 -right-2"
             >
-              {{ basket?.items?.length }}
+              {{ basket.total_quantity }}
             </div>
             <Icon
               name="material-symbols:shopping-cart-outline"
