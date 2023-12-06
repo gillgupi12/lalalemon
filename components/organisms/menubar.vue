@@ -126,7 +126,7 @@ const route = useRoute();
       </NuxtLink>
 
       <div
-        v-if="route.fullPath !== '/checkout'"
+        v-if="!route.fullPath.includes('checkout')"
         class="hidden md:flex flex-row space-x-8 text-lg px-4"
       >
         <div v-for="(toolbarItem, index) in toolbarItems" :key="index">
@@ -142,7 +142,7 @@ const route = useRoute();
 
       <div class="flex flex-row items-center gap-4">
         <UPopover
-          v-if="route.fullPath !== '/checkout'"
+          v-if="!route.fullPath.includes('checkout')"
           mode="hover"
           :popper="{ offsetDistance: 0 }"
         >
