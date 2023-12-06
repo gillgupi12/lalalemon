@@ -20,6 +20,12 @@ const logout = async () => {
   const response = await supabase.auth.signOut();
   if (response.error) return;
   userData.value = null;
+  toggleMobile.value = false;
+  router.push("/auth/login");
+};
+const login = () => {
+  userData.value = null;
+  toggleMobile.value = false;
   router.push("/auth/login");
 };
 
@@ -97,7 +103,7 @@ const womenItems = [
 
 const handleLink = (link: string) => {
   router.push({ name: link });
-  openMobileNav();
+  toggleMobile.value = false;
 };
 
 const { basket } = storeToRefs(useBasketStore());
@@ -273,10 +279,16 @@ const route = useRoute();
         </UAccordion>
         <div class="p-4 flex flex-col space-y-1">
           <NuxtLink
-            v-if="userData?.id"
-            to="/auth/login"
-            class="text-sm hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500 dark:hover:text-white"
+            v-if="!userData?.id"
+            @click="login()"
+            class="text-sm cursor-pointer hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500 dark:hover:text-white"
             >Login</NuxtLink
+          >
+          <NuxtLink
+            v-else
+            @click="logout()"
+            class="text-sm cursor-pointer hover:text-black hover:underline hover:underline-offset-2 hover:decoration-red-500 dark:hover:text-white"
+            >Logout</NuxtLink
           >
         </div>
       </UCard>
