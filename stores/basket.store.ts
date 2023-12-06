@@ -106,8 +106,8 @@ export const useBasketStore = defineStore("basket", {
               id: this.basket?.id,
               user_id: userData.value.id,
               items: basketItems,
-              total_quantity: 0,
-              total_price: 1,
+              total_quantity: basketItems.reduce((total, item) => total + Number(item.quantity), 0),
+              total_price: basketItems.reduce((total, item) => total + Number(item.quantity) * Number(item.price), 0),
             },
           ] as never)
           .eq("user_id", userData.value.id)
@@ -130,8 +130,8 @@ export const useBasketStore = defineStore("basket", {
               id: this.basket?.id,
               user_id: userData.value.id,
               items: basketItems,
-              total_quantity: this.basket.items.reduce((total, item) => total + item.quantity, 0),
-              total_price: this.basket.items.reduce((total, item) => total + item.quantity * item.price, 0),
+              total_quantity: basketItems.reduce((total, item) => total + Number(item.quantity), 0),
+              total_price: basketItems.reduce((total, item) => total + Number(item.quantity) * Number(item.price), 0),
             },
           ] as never)
           .eq("user_id", userData.value.id)
@@ -158,8 +158,8 @@ export const useBasketStore = defineStore("basket", {
               id: this.basket?.id,
               user_id: userData.value.id,
               items: basketItems,
-              total_quantity: 0,
-              total_price: 1,
+              total_quantity: basketItems.reduce((total, item) => total + Number(item.quantity), 0),
+              total_price: basketItems.reduce((total, item) => total + Number(item.quantity) * Number(item.price), 0),
             },
           ] as never)
           .eq("user_id", userData.value.id)
