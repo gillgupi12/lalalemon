@@ -1,3 +1,5 @@
+import type { Item } from 'store/basket.store'
+
 interface State {
     checkoutDetails: {
         email: string;
@@ -7,7 +9,7 @@ interface State {
             ccv: string;
             cardholder: string;
         };
-        items: [];
+        items: Item[]
         order_total: number
         order_quantity: number
         billing_details: {};

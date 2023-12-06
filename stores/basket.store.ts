@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-interface Item {
+export interface Item {
   id: string;
   product_id: string;
   color_id: string;

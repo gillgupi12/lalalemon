@@ -7,6 +7,7 @@ const supabase = useSupabaseClient();
 const { getUserAddresses } = useAuthStore();
 const { getColor } = useColorStore();
 const { checkoutDetails } = storeToRefs(useCheckOutStore());
+const { basket } = storeToRefs(useBasketStore());
 const basketData = ref();
 
 const handleGetUserAddress = async () => {
@@ -36,8 +37,9 @@ onMounted(async () => {
   await handleGetUserAddress();
   await getData();
   if (basketData.value) {
-    checkoutDetails.value.order_quantity = basketData.value?.length;
-    checkoutDetails.value.order_total = totalAmount.value;
+    checkoutDetails.value.items = basket.value.items;
+    checkoutDetails.value.order_quantity = basket.value.total_quantity;
+    checkoutDetails.value.order_total = basket.value.total_price;
   }
 });
 </script>
