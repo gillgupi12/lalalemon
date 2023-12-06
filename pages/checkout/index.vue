@@ -75,7 +75,7 @@ onMounted(async () => {
         </div>
       </UCard>
       <div class="flex justify-between pb-10 px-4 md:px-0 items-center">
-        <div />
+        <div></div>
         <UButton
           color="red"
           label="CONTINUE TO PAYMENT"

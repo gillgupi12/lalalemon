@@ -1,6 +1,7 @@
 <script setup>
 import Card from "components/organisms/common/card.vue";
 import AddressCard from "components/organisms/profile/address-card.vue";
+import OrdersCard from "components/organisms/profile/orders-card.vue";
 const router = useRouter();
 useHead({
   title: "Profile | Lalalemon",
@@ -74,25 +75,7 @@ const { userData } = storeToRefs(useAuthStore());
     </div>
 
     <div class="flex flex-col gap-4">
-      <Card>
-        <div class="flex flex-col gap-4">
-          <div class="flex flex-row items-center justify-between">
-            <div />
-            <div class="text-center font-bold text-lg">Your Order History</div>
-            <div />
-          </div>
-          <div class="text-xs text-center">
-            Don't see your order? Please note it may take 5-10 minutes to
-            appear. We appreciate your patience, thank you.
-          </div>
-          <UButton
-            label="BEGIN SHOPPING"
-            color="red"
-            class="rounded-none w-full text-center flex items-center justify-center py-4"
-            @click="router.push('/')"
-          />
-        </div>
-      </Card>
+      <OrdersCard />
     </div>
   </UContainer>
 </template>

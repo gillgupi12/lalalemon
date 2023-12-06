@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ProductCheckoutCard from "components/organisms/product/checkout-card.vue";
-
 import ProductCard from "components/organisms/product/card.vue";
+
 const array = ref<any>([
   {
     name: "Steady State Half zip",
@@ -59,6 +59,7 @@ const basketData = ref();
 const router = useRouter();
 const loading = ref(true);
 const supabase = useSupabaseClient();
+const { basket } = storeToRefs(useBasketStore());
 const getData = async () => {
   const response = await supabase
     .rpc("get_basket_with_product_details")
@@ -124,11 +125,13 @@ const breakpoints = {
     </div>
     <div v-else>
       <UContainer
-        v-if="basketData?.length > 0"
+        v-if="basket.total_quantity > 0"
         class="flex flex-col gap-4 py-10"
       >
         <div class="flex flex-row justify-between">
-          <p class="md:text-3xl font-bold">My Bag({{ basketData?.length }})</p>
+          <p class="md:text-3xl font-bold">
+            My Bag({{ basket.total_quantity }})
+          </p>
           <p class="md:text-xl font-bold">Need Help? +852 8009 06220</p>
         </div>
         <UDivider />

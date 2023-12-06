@@ -116,7 +116,7 @@ const route = useRoute();
         @click="openMobileNav"
       >
         <Icon
-          v-if="route.fullPath !== '/checkout'"
+          v-if="!route.fullPath.includes('checkout')"
           name="prime:bars"
           size="28"
         />
@@ -188,13 +188,14 @@ const route = useRoute();
           </template>
         </UPopover>
 
-        <NuxtLink :to="{ name: 'basket' }">
+        <NuxtLink to="/basket">
           <div class="relative">
             <div
-              v-if="basket?.total_quantity"
               class="absolute bg-red-500 text-white rounded-full border p-2 w-3 h-3 flex items-center justify-center text-xs -top-1 -right-2"
             >
-              {{ basket.total_quantity }}
+              <ClientOnly fallback="0">
+                {{ basket?.total_quantity }}</ClientOnly
+              >
             </div>
             <Icon
               name="material-symbols:shopping-cart-outline"

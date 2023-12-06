@@ -3,7 +3,10 @@ export interface Item {
   id: string;
   product_id: string;
   color_id: string;
-  size_id: string;
+  size_id?: {
+    quantity: number,
+    size: string
+  };
   price: number;
   quantity: number;
 }
@@ -21,7 +24,9 @@ interface State {
 
 export const useBasketStore = defineStore("basket", {
   state: (): State => ({
-    basket: {} as Basket,
+    basket: {
+      total_quantity: 0
+    } as Basket,
   }),
   actions: {
     addToBasket(
@@ -171,6 +176,31 @@ export const useBasketStore = defineStore("basket", {
         return { data, error }
       }
     },
+    async deleteAllBasketItem() {
+      const supabase = useSupabaseClient();
+      const { userData } = storeToRefs(useAuthStore());
+      if (userData.value && userData.value.id) {
+        const { data, error } = await supabase
+          .from("user_basket")
+          .update([
+            {
+              id: this.basket?.id,
+              user_id: userData.value.id,
+              items: [],
+              total_quantity: 0,
+              total_price: 0
+            },
+          ] as never)
+          .eq("user_id", userData.value.id)
+          .select();
+
+        if (data && data[0]) {
+          this.basket = data[0];
+        }
+        return { data, error }
+      }
+
+    }
   },
   getters: {},
 });

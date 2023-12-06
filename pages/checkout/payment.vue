@@ -4,9 +4,13 @@ definePageMeta({
   layout: false,
 });
 const router = useRouter();
+const toast = useToast();
+const supabase = useSupabaseClient();
 const { getUserAddresses } = useAuthStore();
 const { userAddresses } = storeToRefs(useAuthStore());
 const { checkoutDetails } = storeToRefs(useCheckOutStore());
+const { deleteAllBasketItem } = useBasketStore();
+const { createNewOrder } = useCheckOutStore();
 
 const handleGetUserAddress = async () => {
   await getUserAddresses();
@@ -28,6 +32,30 @@ const validate = (state: any): FormError[] => {
   if (!state.cardholder)
     errors.push({ path: "cardholder", message: "Required" });
   return errors;
+};
+
+const createOrderFn = async () => {
+  const response = await createNewOrder();
+  if (response?.error) {
+    toast.add({
+      title: "Error",
+      description: "Failed to create Order",
+      timeout: 3000,
+      color: "red",
+    });
+  } else if (response?.data && response.data[0]) {
+    await deleteAllBasketItem();
+    const orderId = response.data[0].id;
+    toast.add({
+      title: "Success",
+      description: "Order has been placed successfully!",
+      timeout: 3000,
+      color: "green",
+    });
+    setTimeout(() => {
+      router.push({ name: "profile-orders-orderId", params: { orderId } });
+    }, 500);
+  }
 };
 </script>
 
@@ -106,11 +134,11 @@ const validate = (state: any): FormError[] => {
         >
         <UButton
           color="red"
-          label="REVIEW ORDER"
+          label="PLACE ORDER"
           size="xl"
           :disabled="validate(checkoutDetails.payment_details).length > 0"
           class="flex items-center justify-center"
-          @click="() => router.push('/checkout/payment')"
+          @click="createOrderFn"
         />
       </div>
     </div>
