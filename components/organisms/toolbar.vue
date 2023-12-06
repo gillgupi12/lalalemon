@@ -2,14 +2,6 @@
 import baseToggleColor from "components/atoms/base-toggle-color.vue";
 const toolbarItems = [
   {
-    label: "Track Order",
-    path: "/track-order",
-  },
-  {
-    label: "Email SignUp",
-    path: "/email-signup",
-  },
-  {
     label: "Stores",
     path: "/stores",
   },
